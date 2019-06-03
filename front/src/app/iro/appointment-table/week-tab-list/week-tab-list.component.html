@@ -1,0 +1,31 @@
+<div class="tabs">
+    <div class="weekTab" *ngFor="let number of numberOfWeeks">
+        <div *ngIf="number == selectedWeekId">
+            <button
+                (click)="this.changeWeekId(number)"
+                class="week_button button_check">
+                {{ number + 1 }}
+                <div class="awaiting-badge" *ngIf="numberOfAwaitingAppointmentArray[number]>0"
+                      title="{{numberOfAwaitingAppointmentArray[number]}} rendez-vous en attente dans les semaines {{ number + 1 }}/{{ number + 2 }}">
+                    {{numberOfAwaitingAppointmentArray[number]}}
+                </div>
+                <br>-<br>
+                {{ number + 2 }}
+
+            </button>
+        </div>
+        <div *ngIf="number != selectedWeekId">
+            <button (click)="this.changeWeekId(number)" class="week_button">
+                {{ number + 1 }}
+                <div class="awaiting-badge" *ngIf="numberOfAwaitingAppointmentArray[number]>0"
+                      title="{{numberOfAwaitingAppointmentArray[number]}} rendez-vous en attente dans les semaines {{ number + 1 }}/{{ number + 2 }}">
+                    {{numberOfAwaitingAppointmentArray[number]}}
+                </div>
+                <br>-<br>
+                {{ number + 2 }}
+            </button>
+        </div>
+    </div>
+</div>
+
+<app-week-tab [selectedWeekId]="selectedWeekId"></app-week-tab>

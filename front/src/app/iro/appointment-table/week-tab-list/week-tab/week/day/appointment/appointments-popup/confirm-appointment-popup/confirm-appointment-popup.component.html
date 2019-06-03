@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Confirmer la validation</h1>
+<div mat-dialog-content>
+    <p class="text">
+        Voulez-vous vraiment <span class = "accept">valider</span> le rendez-vous avec <span class = "bold">{{data.applicant.firstname}} {{data.applicant.lastname}} </span>
+        le <span class="bold">{{data.starting_date * 1000 | date: 'EEEE dd MMMM' : 'GMT+0' : 'fr'}} </span>
+        à <span class = "bold">{{data.starting_date * 1000 | date: 'HH:mm' : 'GMT+0'}} </span> ?
+    </p>
+</div>
+<div mat-dialog-actions>
+    <button mat-stroked-button (click)="onNoClick()" cdkFocusInitial>Annuler</button>
+    <button mat-stroked-button (click)="acceptAppointment(data)" [mat-dialog-close]="true" class="accept-button">Accepter le rendez-vous</button>
+</div>

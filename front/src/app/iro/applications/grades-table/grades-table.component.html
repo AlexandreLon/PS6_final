@@ -1,0 +1,15 @@
+<table id="grades">
+  <tr>
+    <th>Année</th>
+    <th>Niveau d'étude</th>
+    <th>Établissement</th>
+    <th>Moyenne</th>
+  </tr>
+
+  <tr *ngFor="let grade of grades">
+    <td>{{ grade.year}}</td>
+    <td>{{ grade.studies_level}}</td>
+    <td>{{ grade.establishment}}</td>
+    <td>{{ grade.grade}}</td>
+  </tr>
+</table>

@@ -1,0 +1,69 @@
+.portals {
+    position: absolute;
+    background: url("http://www.geipi-polytech.org/sites/default/files/photos/Polytech_Nice_presentation.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: calc(100vh - 50px);
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.transparent {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100vw;
+    height: calc(100vh - 50px);
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.content {
+    position: absolute;
+    width: 100vw;
+    height: calc(100vh - 50px);
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.links {
+    position: relative;
+    top: 50%;
+    transform: translateY(calc(-50% - 130px));
+    width: 50%;
+    margin: auto;
+}
+
+.link-left {
+    float: left;
+}
+
+.link-right {
+    float: right;
+}
+
+a {
+    background: rgba(0, 0, 0, 1);
+    height: 230px;
+    width: 200px;
+    text-align: center;
+    line-height: 230px;
+    color: white;
+    text-decoration: none;
+    font-size: 120%;
+    border-radius: 20px;
+}
+
+a:hover {
+    background: rgba(20, 20, 20, 1);
+    color: rgb(226, 255, 209);
+}

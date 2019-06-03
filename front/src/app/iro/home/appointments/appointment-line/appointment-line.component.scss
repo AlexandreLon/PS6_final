@@ -1,0 +1,43 @@
+.uppercase {
+    text-transform: uppercase;
+}
+.mat-card {
+    box-shadow: 1px 1px 5px 0px #656565;
+}
+.mat-card:hover {
+    background-color: #cfcfcf;
+    cursor: pointer;
+}
+.badge {
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.badge-orange {
+    background-color: rgb(255, 170, 101);
+}
+
+.badge-gray {
+    background-color: #ddd;
+}
+
+.badge-red {
+    background-color: rgb(255, 102, 102);
+}
+
+.badge-yellow {
+    background-color: rgb(252, 255, 93);
+}
+
+.appointment-dates{
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.appointment-hour{
+    font-weight: bold;
+}
+
+div{
+    font-size: 14.5px;
+}

@@ -1,0 +1,15 @@
+<table id="wishes">
+  <tr>
+    <th>Choix</th>
+    <th>Université</th>
+    <th>Pays</th>
+    <th>Professeur responsable</th>
+  </tr>
+
+  <tr *ngFor="let wish of wishes">
+    <td>{{ wish.priority}}</td>
+    <td>{{ wish.university}}</td>
+    <td>{{ wish.country}}</td>
+    <td>{{ wish.in_charge_teacher}}</td>
+  </tr>
+</table>

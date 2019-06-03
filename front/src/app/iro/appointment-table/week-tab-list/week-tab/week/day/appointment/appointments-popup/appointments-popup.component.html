@@ -1,0 +1,49 @@
+<div mat-dialog-actions>
+    <!-- <button mat-button (click)="onNoClick()" class="close-button">Fermer</button> -->
+    <i (click)="onNoClick()" class="fas fa-times up-right"></i>
+</div>
+
+
+<mat-tab-group>
+    <mat-tab *ngFor="let appointment of data">
+        <ng-template mat-tab-label>
+            {{ appointment.starting_date * 1000 | date: 'HH:mm' : 'GMT+0'}}
+            <div class="awaiting-badge" *ngIf="!appointment.status" title="Rendez-vous en attente">
+                <span>?</span>
+            </div>
+        </ng-template>
+        
+        <h1 mat-dialog-title>Rendez-vous avec {{appointment.applicant.firstname}} {{appointment.applicant.lastname}}</h1>
+        <div mat-dialog-content style="margin: 0;padding: 0;">
+            <p>Type : {{appointment.type}}</p>
+            <p>Objet : {{appointment.object}}</p>
+            <p>Le {{appointment.starting_date * 1000 | date: 'EEEE dd MMMM' : 'GMT+0' : 'fr'}}</p>
+            <p>De {{appointment.starting_date * 1000 | date: 'HH:mm' : 'GMT+0'}}
+                à {{appointment.ending_date * 1000 | date: 'HH:mm' : 'GMT+0'}}</p>
+
+            <div class="cancel-appointment" *ngIf="appointment.status">
+                <button class="cancel-appointment-button" mat-stroked-button (click)="openCancelDialog(appointment)">
+                    Annuler le rendez-vous
+                </button>
+            </div>
+            
+            <div class="access-application-button">
+                <button mat-stroked-button (click)="accessApplications(appointment.applicant.id)">
+                    Accéder aux candidatures de l'étudiant
+                </button>
+            </div>
+
+
+            <div class="accept-refuse-buttons" *ngIf="!appointment.status">
+                <hr width="75%">
+                <img class="accept-refuse-button" title="Refuser le rendez-vous" alt="Refuser" src="/assets/refuse.png" height="65px" (click)="openConfirmationDialog(false, appointment)"/>
+                <img class="accept-refuse-button" title="Accepter le rendez-vous" alt="Accepter" src="/assets/accept.png" height="65px"  (click)="openConfirmationDialog(true, appointment)"/>
+            </div>
+            
+        </div>
+    </mat-tab>
+</mat-tab-group>
+
+<div mat-dialog-actions>
+    <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+</div>

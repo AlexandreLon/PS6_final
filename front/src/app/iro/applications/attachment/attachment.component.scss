@@ -1,0 +1,23 @@
+img{
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+}
+
+h5{
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 5px;
+}
+
+.attachment-sample{
+  padding: 5px;
+}
+.attachment-sample:hover{
+  background-color: rgba(145, 157, 167, 0.46);
+  border-radius: 5px;
+  cursor: pointer;
+}

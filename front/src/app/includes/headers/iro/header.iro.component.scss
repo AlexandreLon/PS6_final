@@ -1,0 +1,72 @@
+
+:host {
+}
+
+table, td {
+    vertical-align: middle;
+}
+
+.menu-link {
+    font-size: 1px;
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 0px;
+    transition: 0.4s;
+}
+
+.menu-link:hover {
+    color: #E06666;
+}
+
+.menu-link-clicked {
+    font-size: 1px;
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 0px;
+    transition: 0.4s;
+    color: #E06666;
+}
+
+.header {
+    padding: 2px;
+    background: whitesmoke;
+    border-bottom: solid darkgrey 1px;
+}
+
+.bri {
+    color: darkred;
+    font-size: 35px;
+    padding-right: 20px;
+    border-right: solid darkgrey 1px;
+}
+
+.logo{
+    padding: 12px;
+}
+
+.buttons {
+    width: 100%;
+}
+
+.linkContainer{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.awaiting-badge{
+    width: 13px;
+    height: 13px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(245, 125, 0);
+    color : white;
+    font-family: Roboto,"Helvetica Neue",sans-serif;;
+    font-size:11px;
+    font-weight: bold;
+    line-height: 14px;
+    padding: 4px;
+    margin: 0px 0px 0px 5px;
+    float: right;
+}

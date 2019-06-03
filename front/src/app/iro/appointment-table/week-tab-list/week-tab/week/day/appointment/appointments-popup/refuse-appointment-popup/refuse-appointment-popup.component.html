@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Confirmer le refus</h1>
+<div mat-dialog-content>
+    <p class="text">
+        Voulez-vous vraiment <span class="refuse">refuser</span> le rendez-vous avec <span
+        class="bold">{{data.applicant.firstname}} {{data.applicant.lastname}} </span>
+        le <span class="bold">{{data.starting_date * 1000 | date: 'EEEE dd MMMM' : 'GMT+0' : 'fr'}} </span>
+        à <span class="bold">{{data.starting_date * 1000 | date: 'HH:mm' : 'GMT+0'}} </span> ?
+    </p>
+    <p class="undertext">
+        Le rendez-vous sera supprimé et vous serez redirigé vers votre application d'e-mail par défaut pour
+        informer la personne.
+    </p>
+</div>
+<div mat-dialog-actions>
+    <button mat-stroked-button (click)="onNoClick()" cdkFocusInitial>Annuler</button>
+
+    <button [mat-dialog-close]="true" mat-button class = "refuse-button">
+        <a mat-stroked-button
+           class="refuse-link"
+           href="mailto:{{data.applicant.email}}?subject=[BRI] Refus de votre rendez-vous du {{data.starting_date* 1000 | date: 'EEEE dd MMMM' : 'GMT+0' : 'fr'}}&body=Le créneau de rendez-vous que vous avez choisi (le {{data.starting_date * 1000 | date: 'EEEE dd MMMM' : 'GMT+0' : 'fr'}} à {{data.starting_date * 1000 | date: 'HH:mm' : 'GMT+0'}}) a été refusé par le Bureau des Relations internationales.%0D%0ARaison du refus:%0D%0A%0D%0A%0D%0A"
+           (click)="refuseAppointment(data)">
+            Refuser le rendez-vous
+        </a>
+    </button>
+    <!--[mat-dialog-close]="data.status" au lieu de onNoClick()-->
+</div>

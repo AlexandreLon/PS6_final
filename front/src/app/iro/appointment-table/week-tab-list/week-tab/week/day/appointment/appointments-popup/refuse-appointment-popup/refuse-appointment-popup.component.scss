@@ -1,0 +1,31 @@
+.bold {
+    font-weight: bolder;
+}
+
+.text {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+}
+
+.undertext {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 10px;
+}
+
+.refuse {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-weight: bolder;
+    color: rgb(226, 87, 76);
+}
+
+.refuse-link {
+    text-decoration: none;
+}
+
+.refuse-button {
+    padding: 0px;
+    margin-left: 20%;
+    color: #fff;
+    background-color: rgb(226, 87, 76);
+    border-color: rgb(226, 87, 76);
+}

@@ -1,0 +1,68 @@
+.mat-dialog-actions {
+    position: relative;
+}
+
+.up-right {
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    padding: 5px;
+    margin: 3px;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+}
+
+.up-right:hover{
+    background-color: red;
+    color: white;
+}
+
+table{
+    padding: 0px;
+    display: inline-block;
+    width: 16%;
+    margin: 2%;
+}
+
+.day-block{
+    position: relative;
+    left: 30%;
+    width: 100px;
+    border: 1px solid black;
+    text-align: center;
+    padding: 0px;
+}
+
+.dayName{
+    width: 100%;
+    height: 25px;
+    margin: 0px;
+}
+
+.day-rows{
+    width: 100%;
+    margin: 0px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.backgroundGray {
+    background: lightblue;
+}
+
+
+.labels-container{
+    position: absolute;
+    left: 0;
+}
+
+.day-container{
+    position: relative;
+}
+
+.invisible{
+    visibility: hidden;
+}

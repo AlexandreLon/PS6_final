@@ -1,0 +1,11 @@
+<mat-grid-list class="day-container" cols="1" rowHeight="26px">
+    <mat-grid-tile class="dayName">
+        {{ dayName }} {{ getDayDate(dayId) }}
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngFor="let number of appointmentsId">
+        <app-appointment [HourId]="number + 9" [AppointmentDayId]="this.dayId">
+        </app-appointment>
+        <mat-divider class="mat-divider-absolute"></mat-divider>
+    </mat-grid-tile>
+</mat-grid-list>

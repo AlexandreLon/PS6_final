@@ -1,0 +1,16 @@
+<app-iro-header></app-iro-header>
+<div class="head">
+    <h1>
+        Planning des rendez-vous
+    </h1>
+    <div class="config-button-container">
+        <button mat-raised-button (click)="openConfigDialog()" class="config-button">
+            <img
+                src="/assets/screwdriver-and-wrench-crossed.png"
+                style="margin-right: 5px"/>
+            Configurer les disponibilités
+        </button>
+    </div>
+</div>
+
+<app-week-tab-list></app-week-tab-list>

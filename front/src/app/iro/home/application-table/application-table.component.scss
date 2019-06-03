@@ -1,0 +1,33 @@
+.frame {
+    border: 1px solid rgba(82, 64, 71, 0.62);
+    margin: 0px;
+    padding: 10px;
+    height: 370px;
+    box-shadow: 1px 1px 5px 0px #656565;
+    width: 96%;
+
+}
+
+.frame-title {
+    font-weight: bold;
+    text-align: center;
+    //margin-bottom: 25px;
+    padding: 5px;
+    font-size: 20px;
+
+}
+
+.empty {
+    width: 100%;
+    height: 250px;
+    line-height: 250px;
+    text-align: center;
+}
+
+app-application {
+    width: 100%;
+}
+
+mat-list-item {
+    margin-top: 10px;
+}

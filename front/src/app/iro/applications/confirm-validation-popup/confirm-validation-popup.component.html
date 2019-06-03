@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Confirmer la validation</h1>
+
+<div mat-dialog-content>
+    <p class="text">
+        Voulez-vous vraiment valider la candidature courante ?
+    </p>
+</div>
+
+<div mat-dialog-actions>
+    <button (click)="onNoClick()" mat-stroked-button cdkFocusInitial class="cancel-button">
+        Annuler
+    </button>
+    <button (click)="validate()" [mat-dialog-close]="true" mat-stroked-button class="action-button">
+        Valider
+    </button>
+</div>

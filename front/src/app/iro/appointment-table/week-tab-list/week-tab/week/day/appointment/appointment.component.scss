@@ -1,0 +1,82 @@
+td{
+    font-size: 11px;
+}
+
+table{
+    width: 90%;
+}
+
+.names{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    // display: inline-block;
+    width: 100%; //calc(50% - 6px);
+    //height: calc(100% - 6px);
+    margin-left: 5px;
+    font-size: 9px;
+    margin-top: 2px;
+    font-weight: bold;
+}
+
+.type{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    width: 100%;
+    margin-left: 5px;
+    font-size: 7px;
+    margin-top: 2px;
+    text-transform: uppercase;
+    color: #939393;
+}
+
+.number-appointments{
+    float: right;
+    z-index: 99;
+    margin-right: 1%;
+    margin-top: 1%;
+}
+
+.awaiting-appointments-container{
+    float: right;
+    z-index: 98;
+    margin-right: 1%;
+    margin-top: 1%;
+}
+
+.uppercase{
+    text-transform: uppercase;
+}
+
+.appointment{
+    height:100%;
+    //line-height: 100%;
+}
+
+.appointment:hover{
+    cursor: pointer;
+    background-color: rgba(207, 207, 207, 0.59);
+}
+
+.buttonAppointment {
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #3f51b5;
+    color : white;
+    font-family: Roboto,"Helvetica Neue",sans-serif;;
+    font-size: 8px;
+    font-weight: bold;
+    line-height: 16px;
+}
+
+.awaiting-badge{
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(245, 125, 0);
+    color : white;
+    font-family: Roboto,"Helvetica Neue",sans-serif;;
+    font-size: 8px;
+    font-weight: bold;
+    line-height: 16px;
+}

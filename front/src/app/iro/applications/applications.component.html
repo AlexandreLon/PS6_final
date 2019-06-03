@@ -1,0 +1,94 @@
+<app-iro-header></app-iro-header>
+<div class="applications-container">
+
+    <div class="top-part">
+        <h2>
+            {{ applicant.firstname }}
+            {{applicant.lastname }}
+        </h2>
+
+        <a href="mailto:{{applicant.email}}" mat-stroked-button class="contact">
+            Contacter
+        </a>
+
+
+
+        <button *ngIf="isValidated()" (click)="openConfirmationDialog()" mat-stroked-button class="validate">
+            Valider la candidature courante
+        </button>
+
+    </div>
+
+    <div class="personal-container">
+        <h4>Informations personnelles</h4>
+
+        <div>Nom :  {{ applicant.firstname }}</div>
+        <div>Prénom :  {{applicant.lastname }}</div>
+        <div>Numéro étudiant :  {{applicant.student_number }}</div>
+        <div>Filière :  {{applicant.pathways }}</div>
+        <div>Inscription en 2017-2018 : {{ applicant.last_year_path}}</div>
+
+        <br>
+        <div>Date de naissance :  {{applicant.birth_date }}</div>
+        <div>Nationalité :  {{applicant.nationality }}</div>
+        <br>
+        <div>Adresse :  {{applicant.address }}</div>
+        <div>{{applicant.zip }} - {{applicant.city }}</div>
+
+        <br>
+        <div>Courriel :  {{applicant.email }}</div>
+        <div>Téléphone fixe : {{applicant.phone }}</div>
+        <div>Téléphone mobile : {{applicant.mobile }}</div>
+    </div>
+
+    <mat-tab-group (selectedTabChange)="onChange()" mat-align-tabs="center" class="tab-container">
+        <mat-tab *ngFor="let application of applicant.applications">
+
+            <div class="application_id" style="display: none;">{{application.id}}</div>
+
+            <ng-template mat-tab-label>
+                {{ application.category}}
+                <span class="awaiting-badge" *ngIf="!application.status" title="Candidature en attente de validation">
+                    <img src="/assets/exclamation-mark.png"
+                         height="18px"
+                         alt="En attente"/>
+                </span>
+            </ng-template>
+
+            <div class="application-container">
+                <h4>Informations candidatures</h4>
+
+                <h5>Moyenne des notes obtenues depuis le baccalauréat :</h5>
+                <app-grades-table
+                        [grades]="applicant.grades_since_bac"
+
+                ></app-grades-table>
+
+
+
+
+                <h5>Indiquez ci-dessous par ordre de préférence les accords d’échange dont vous souhaitez bénéficier :
+                </h5>
+                <app-wishes-table
+                        [wishes]="currentApplication.wishes"
+                ></app-wishes-table>
+
+
+                <div>Fait à {{currentApplication.signature_place}}</div>
+                <div>Le {{day(application.date)}}</div>
+
+            </div>
+
+            <div class="attachment-container">
+                <h4>Pièces jointes</h4>
+                <app-attachment *ngFor="let attachment of currentApplication.attachments"
+                        [attachment] = attachment
+                >
+
+                </app-attachment>
+            </div>
+
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

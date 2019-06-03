@@ -1,0 +1,54 @@
+<div mat-dialog-actions>
+    <i (click)="onNoClick()" class="fas fa-times up-right"></i>
+</div>
+
+<h1 mat-dialog-title>Configuration des disponibilités</h1>
+
+<div mat-dialog-content>
+    <table class="day-container" *ngFor="let number of days">
+        <td class="labels-container">
+            <tr style="height: 40px;">
+
+            </tr>
+            <tr *ngFor="let hour of hours" class="hour-label">
+                {{
+                    hour
+                }}h
+            </tr>
+            <tr>
+                18h
+            </tr>
+        </td>
+
+        <td class="day-block">
+            <p class="day-name">
+                {{ DAY_NAMES[number] }}
+            </p>
+            <div *ngFor="let hour of hours" class="day-rows" id="row">
+                <p class="number_day" style="display: none;">{{ hour }}</p>
+                <div *ngIf="isGray(hour, number)" class="backgroundGray">
+                    <span class = "invisible">-</span>
+                </div>
+                <div *ngIf="!isGray(hour, number)"><span class = "invisible">-</span></div>
+            </div>
+        </td>
+        <button
+            mat-stroked-button
+            (click)="delete(number)"
+            style="background: brown; color:white; display: block; margin: auto;"
+        >
+            Effacer
+        </button>
+    </table>
+    <button
+        mat-stroked-button
+        (click)="openConfirmationDialog()"
+        style="background: darkgreen; color:white; display: block; margin: auto;"
+    >
+        Enregistrer
+    </button>
+</div>
+
+<div mat-dialog-actions>
+    <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+</div>

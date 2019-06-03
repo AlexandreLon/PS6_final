@@ -1,0 +1,110 @@
+<form [formGroup]="appointmentForm" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+    <mat-grid-list cols="10" rowHeight="40px">
+        <!--Col 1 row 1-->
+        <mat-grid-tile
+                [colspan]="3"
+                [rowspan]="1">
+
+            <mat-form-field>
+                <mat-label>Type de rendez-vous</mat-label>
+                <mat-select required [formControlName]="'type'">
+                    <mat-option *ngFor="let appointmentType of APPOINTMENT_LIST" [value]="appointmentType">
+                        {{ appointmentType }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile
+                [colspan]="1"
+                [rowspan]="12">
+            <div style="border: 1px solid; height: 100%;"></div>
+        </mat-grid-tile>
+        <!--Col 1 row 2-->
+        <mat-grid-tile
+                [colspan]="5"
+                [rowspan]="2">
+
+            <mat-form-field>
+                <input required matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Choisir une date" [formControlName]="'date'"
+                       (dateChange)="addEvent('change', $event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+
+        </mat-grid-tile>
+
+        <!--Col 2 row 1-->
+
+        <mat-grid-tile
+                [colspan]="3"
+                [rowspan]="4">
+
+
+            <mat-form-field style="width: 90%;height: 100%;">
+                <textarea required matInput placeholder="Objet du rendez-vous" [formControlName]="'object'" ></textarea>
+            </mat-form-field>
+
+
+        </mat-grid-tile>
+
+        <!--Col 2 row 2-->
+        <mat-grid-tile *ngFor="let hour of arrayNiches; let i=index" class="niche-container"
+                [colspan]="5"
+                [rowspan]="1">
+
+             <!--each hour has 4 buttons-->
+            <mat-grid-list cols="4" rowHeight="50px" style="width: 100%">
+                <mat-grid-tile
+                        [colspan]="1"
+                        [rowspan]="1">
+                    <button mat-raised-button color="primary" *ngIf="hour[0] == true" (click)="nicheSelected($event)" class="hour-button">
+                        {{i+8}}h
+                    </button>
+                    <button mat-raised-button color="primary" disabled *ngIf="hour[0] == false">
+                        {{i+8}}h
+                    </button>
+                </mat-grid-tile>
+                <mat-grid-tile
+                        [colspan]="1"
+                        [rowspan]="1">
+                    <button mat-raised-button color="primary" *ngIf="hour[1] == true" (click)="nicheSelected($event)" class="hour-button">
+                        {{i+8}}h15
+                    </button>
+                    <button mat-raised-button color="primary" disabled *ngIf="hour[1] == false">
+                        {{i+8}}h15
+                    </button>
+                </mat-grid-tile>
+                <mat-grid-tile
+                        [colspan]="1"
+                        [rowspan]="1">
+                    <button mat-raised-button color="primary" *ngIf="hour[2] == true" (click)="nicheSelected($event)" class="hour-button">
+                        {{i+8}}h30
+                    </button>
+                    <button mat-raised-button color="primary" disabled *ngIf="hour[2] == false">
+                        {{i+8}}h30
+                    </button>
+                </mat-grid-tile>
+                <mat-grid-tile
+                        [colspan]="1"
+                        [rowspan]="1">
+                    <button mat-raised-button color="primary" *ngIf="hour[3] == true" (click)="nicheSelected($event)" class="hour-button">
+                        {{i+8}}h45
+                    </button>
+                    <button mat-raised-button color="primary" disabled *ngIf="hour[3] == false">
+                        {{i+8}}h45
+                    </button>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+
+
+    <button  mat-raised-button class="submit-button" type="submit" (click)="openConfirmationDialog()">Soumettre la demande</button>
+</form>
+

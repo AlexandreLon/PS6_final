@@ -1,0 +1,116 @@
+.applications-container{
+  margin-top: 40px;
+}
+
+h2{
+  text-align:center;
+}
+
+.tab-container{
+  margin-left: 20px;
+  display: inline-block;
+  width: 70%;
+}
+
+.tab-container h5{
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+.personal-container{
+  width: calc(20% - 30px);
+  background: linear-gradient(#E0EAFC, #CFDEF3);
+  border: 1px solid black;
+  margin-left: 10px;
+  border-radius: 5px;
+  padding: 10px;
+  display: inline-block;
+  height: 100%;
+  margin-top: 30px;
+}
+.personal-container h4{
+  text-align: center;
+}
+.application-container{
+  padding: 10px;
+  width: calc(70% - 30px);
+  display: inline-block;
+  border-right: 1px solid lightgray;
+  height: 100%;
+
+}
+mat-tab-group{
+  height: 100%;
+}
+
+.attachment-container{
+  width: calc(25% - 30px);
+  padding: 10px;
+
+  display: inline-block;
+}
+
+.attachment-container , .personal-container , .application-container{
+  vertical-align: top;
+  height: 100%;
+}
+.attachment-container div , .personal-container div , .application-container div{
+  margin: 10px;
+}
+
+.top-part{
+    width: 100%;
+}
+
+.validate{
+  height: 40px;
+  position: absolute;
+  right: 115px;
+  top: 140px;
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.annotate{
+  height: 40px;
+  position: absolute;
+  top: 140px;
+  left: 10px;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.contact{
+  height: 40px;
+  position: absolute;
+  right: 10px;
+  top: 140px;
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.awaiting-badge{
+    margin-left: 7px;
+}
+#grades, #wishes{
+  width: 100%;
+}
+
+#grades th, #wishes th{
+    padding-left: 5px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+
+}
+
+app-attachment{
+  margin: 10px;
+
+}
+
+

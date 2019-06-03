@@ -1,0 +1,43 @@
+table {
+  width: 100%;
+}
+
+
+.applicant-table{
+  width: 80%;
+  margin: auto;
+}
+.mat-row:hover{
+  background-color: #7d7d7d;
+  cursor: pointer;
+}
+
+.hide{
+  display: none;
+}
+
+mat-footer-row mat-footer-cell{
+  justify-content: center;
+  font-style: italic;
+}
+
+.table-header {
+  position: relative;
+  display: block;
+  margin: 1% 2%;
+}
+
+.element {
+  display: inline-block;
+  margin: 0 2%;
+}
+
+.element-title {
+  font-size: 125%;
+  margin: 10px;
+}
+
+.datepicker {
+  width: 30%;
+  display: inline-block;
+}

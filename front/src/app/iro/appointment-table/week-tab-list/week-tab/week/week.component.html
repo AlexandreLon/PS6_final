@@ -1,0 +1,13 @@
+<mat-grid-list cols="1" rowHeight="300px">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <div class="week-table-container">
+            <div class="day-container" *ngFor="let number of days">
+                <app-day
+                    [dayId]="weekId * 7 + number + 1"
+                    [dayName]="this.DAY_NAMES[number - 1]"
+                >
+                </app-day>
+            </div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

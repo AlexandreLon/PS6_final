@@ -1,0 +1,24 @@
+
+
+#wishes th{
+  padding-left: 5px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+
+}
+
+#wishes {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#wishes td, #wishes th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#wishes tr:nth-child(even){background-color: #f2f2f2;}
+

@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Annotation {{ this.data.category}}</h1>
+
+<div mat-dialog-content>
+  <mat-form-field style="width: 90%;height: 100%;">
+    <textarea required matInput placeholder="Annotation sur la candidature" [(ngModel)]="this.data.annotation"  ></textarea>
+  </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions>
+  <button (click)="validate()" [mat-dialog-close]="true" mat-stroked-button cdkFocusInitial class="action-button">
+    Valider
+  </button>
+</div>

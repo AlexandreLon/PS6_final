@@ -1,0 +1,72 @@
+table {
+    border: 1px solid;
+    width: 100%;
+}
+
+td {
+    vertical-align: middle;
+}
+
+.tabsTable {
+    border: none;
+    padding: 0px;
+}
+
+.weekTab {
+    border: none;
+    padding: 0px;
+}
+
+button {
+    font-size: 9px;
+    background-color: transparent;
+    border: 2px darkgrey outset;
+    //padding: 1px;
+    padding: 2px 0px 2px 15%;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+// More
+app-week-tab {
+    width: 100%;
+}
+
+.weekTab {
+    display: inline-block;
+    width: calc(100% / 52);
+}
+
+.tabs {
+    width: 100%;
+}
+
+.week_button {
+    border: none;
+    border: 1px solid black;
+}
+
+.button_check {
+    background: lightblue;
+}
+
+.awaiting-badge {
+    width: 35%;
+    height: 100%;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(245, 125, 0);
+    color: ghostwhite;
+    font-family: Roboto, "Helvetica Neue", sans-serif;;
+    font-size: 100%;
+    font-weight: bold;
+    line-height: 100%;
+    padding: 3%;
+    float: right;
+    margin-right: 3%;
+}

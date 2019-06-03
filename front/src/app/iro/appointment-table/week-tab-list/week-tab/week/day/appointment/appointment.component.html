@@ -1,0 +1,46 @@
+<div
+    *ngIf="this.appointments.length == 1"
+    (click)="openDialog()"
+    class="appointment"
+>
+    <div class="awaiting-appointments-container">
+        <div class="awaiting-badge" *ngIf="!this.appointments[0].status" title="Rendez-vous en attente">
+            <span>?</span>
+        </div>
+    </div>
+    <div class="names">
+        {{ this.appointments[0].applicant.firstname }}
+        <span class="uppercase">{{
+            this.appointments[0].applicant.lastname
+            }}</span>
+    </div>
+    <div class="type">
+        {{ this.appointments[0].type }}
+    </div>
+</div>
+
+<div
+    *ngIf="this.appointments.length > 1"
+    (click)="openDialog()"
+    class="appointment"
+>
+    <div class="number-appointments">
+        <div class="buttonAppointment" title="{{ appointments.length - 1 }} rendez-vous de plus dans pendant ce créneau">
+            <span>+{{ appointments.length - 1 }}</span>
+        </div>
+    </div>
+    <div class="awaiting-appointments-container">
+        <div class="awaiting-badge" *ngIf="numberOfAwaitingAppointments() > 0" title="{{numberOfAwaitingAppointments()}} rendez-vous en attente">
+            <span>?</span>
+        </div>
+    </div>
+    <div class="names">
+        {{ this.appointments[0].applicant.firstname }}
+        <span class="uppercase">{{
+            this.appointments[0].applicant.lastname
+            }}</span>
+    </div>
+    <div class="type">
+        {{ this.appointments[0].type }}
+    </div>
+</div>

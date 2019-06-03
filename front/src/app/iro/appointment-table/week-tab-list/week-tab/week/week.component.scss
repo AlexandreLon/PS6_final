@@ -1,0 +1,49 @@
+td {
+}
+
+table {
+    width: 100%;
+
+    border: 1px solid;
+}
+
+.hour-big-container{
+    width: 100%;
+    margin-top: 26px;
+    text-align: center;
+    height: 100%;
+    position: relative;
+    top: 7px;
+}
+
+.hour-container{
+    display: block;
+    height: 27px;
+}
+
+
+app-day{
+    width: 100%;
+}
+.week-table-container{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.day-container{
+    height: 100%;
+
+    display: inline-block;
+    width: calc(100% / 5);
+
+}
+.mat-divider-centered{
+    transform: translateY(-10px);
+}
+mat-divider{
+    width: 100%;
+}
+tr{
+    font-size: 9px;
+}

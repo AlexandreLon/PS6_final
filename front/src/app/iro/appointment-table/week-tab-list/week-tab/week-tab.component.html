@@ -1,0 +1,39 @@
+<mat-grid-list cols="20" rowHeight="310px">
+    <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="2">
+        <div class="gradation">
+            <div class="hour-big-container">
+                <div class="hour-container" *ngFor="let hour of hours">
+                    <span class="hour-number">{{hour}}h</span>
+                    <mat-divider class="mat-divider-centered"></mat-divider>
+                </div>
+
+            </div>
+
+            <div class="hour-big-container">
+                <div class="hour-container" *ngFor="let hour of hours">
+                    <span class="hour-number">{{hour}}h</span>
+                    <mat-divider class="mat-divider-centered"></mat-divider>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </mat-grid-tile>
+    <mat-grid-tile
+            [colspan]="18"
+            [rowspan]="1"
+            >
+        <app-week [weekId]="selectedWeekId"></app-week>
+
+    </mat-grid-tile>
+    <mat-grid-tile
+            [colspan]="18"
+            [rowspan]="1"
+            >
+        <app-week [weekId]="selectedWeekId + 1"></app-week>
+    </mat-grid-tile>
+</mat-grid-list>

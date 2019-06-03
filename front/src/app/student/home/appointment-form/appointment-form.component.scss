@@ -1,0 +1,42 @@
+.submit-button {
+    margin: 75px auto auto;
+    background-color: transparent;
+    font-size: 1em;
+    padding: 5px;
+    display: block;
+    width: 200px;
+
+
+}
+
+mat-grid-tile button {
+    width: 140px;
+    margin: 5px;
+}
+
+.time {
+    width: 5%;
+
+    margin: 5px;
+}
+
+.time:valid {
+}
+
+.time:invalid {
+    box-shadow: 0 0 2px red;
+    color: red;
+}
+
+.selected {
+    background: midnightblue;
+    box-shadow: 0 5px ;
+    transform: translateY(5px);
+}
+
+.hour-button{
+}
+
+.hour-button:hover{
+    background: midnightblue;
+}

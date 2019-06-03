@@ -1,0 +1,46 @@
+<mat-card
+    class="meeting row z-depth-1"
+    (click)="selectApplication(appointment.applicant.id)"
+>
+    <mat-grid-list cols="4" rowHeight="20px">
+        <mat-grid-tile class = "appointment-dates">
+            <!-- <span class="badge">{{day(appointment.starting_date)}}</span> -->
+            <span
+                class="badge badge-red"
+                *ngIf="appointment.starting_date * 1000 < timestamp_end_of_day(0)">
+                Aujourd'hui
+            </span>
+            <span
+                class="badge badge-orange"
+                *ngIf="
+                    appointment.starting_date * 1000 < timestamp_end_of_day(1) &&
+                    appointment.starting_date * 1000 > timestamp_end_of_day(0)">
+                Demain
+            </span>
+            <span
+                class="badge badge-yellow"
+                *ngIf="
+                    appointment.starting_date * 1000 < timestamp_end_of_day(2) &&
+                    appointment.starting_date * 1000 > timestamp_end_of_day(1)">
+                Après-Demain
+            </span>
+            <span
+                class="badge badge-gray"
+                *ngIf="
+                    appointment.starting_date * 1000 >= timestamp_end_of_day(2)">
+                Le {{ appointment.starting_date * 1000 | date: "dd/MM":"GMT+0" }}
+            </span>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="appointment-hour">
+                {{ appointment.starting_date * 1000 | date: "HH:mm":"GMT+0" }}
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="uppercase">{{ appointment.applicant.lastname }}</div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="">{{ appointment.applicant.firstname }}</div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-card>

@@ -1,0 +1,96 @@
+<div class="table-header">
+    <div class="element">
+        <button (click)="sort()" mat-stroked-button class="sort-button" style="font-size: 13px">Tri ordre alphabétique</button>
+    </div>
+    <div class="element">
+        <button (click)="filter_unchecked()" mat-stroked-button class="sort-button" style="font-size: 13px">Filtrer par candidatures non revues</button>
+    </div>
+    <div class="element">
+        Du :
+        <!-- <input  type="datetime-local" matInput placeholder="Date" value="" class="datepicker1"> -->
+        <mat-form-field>
+            <input [matDatepickerFilter]="minFilter" [(ngModel)]="start" matInput [matDatepicker]="picker1" placeholder="Date de début">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        Au :
+        <!-- <input [(ngModel)]="end" type="datetime-local" matInput placeholder="Date" value="" class="datepicker2"> -->
+        <mat-form-field>
+            <input [matDatepickerFilter]="maxFilter" [(ngModel)]="end" matInput [matDatepicker]="picker2" placeholder="Date de fin">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <button (click)="filter_date()" mat-stroked-button class="sort-button" style="font-size: 12px">Filtrer par date</button>
+    </div>
+    <div class="element">
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="word" matInput placeholder="Recherche (ex: SI, Jean)" class="search" value="">
+          </mat-form-field>        
+        <button (click)="search()" mat-stroked-button class="sort-button"><i class="fas fa-search"></i></button>
+    </div>
+    <div class="element" style=" float: right; color: darkred">
+        <button (click)="reset()" mat-stroked-button class="sort-button" style="font-size: 12px; font-weight: bold;">Réinitialiser tous les filtres et tris</button>
+    </div>
+</div>
+<div class="applicant-table">
+    <!--<div class="spinner-container" *ngIf="dataSource.loading$ | async">&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;<mat-spinner></mat-spinner>&ndash;&gt;&ndash;&gt;-->
+    <!--</div>-->
+    <table mat-table [dataSource]="applicantList">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef>Nom</th>
+            <td mat-cell *matCellDef="let applicant"> {{applicant.lastname}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef> Prénom</th>
+            <td mat-cell *matCellDef="let applicant"> {{applicant.firstname}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="pathway">
+            <th mat-header-cell *matHeaderCellDef> Filière</th>
+            <td mat-cell *matCellDef="let applicant"> {{applicant.pathways}} </td>
+        </ng-container>
+
+        <!-- Number of applications -->
+        <ng-container matColumnDef="numberOfApplications">
+            <th mat-header-cell *matHeaderCellDef> Nombre de candidatures</th>
+            <td mat-cell *matCellDef="let applicant"> {{applicant.applications.length}} </td>
+        </ng-container>
+
+        <!-- Status -->
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Statut</th>
+            <td mat-cell *matCellDef="let applicant" class="status-line">
+                <span *ngIf="!applicant.status">
+                    <img src="/assets/exclamation-mark.png"
+                         height="4.5%"
+                         title="{{getNumberOfAwaitingApplications(applicant)}} candidature(s) en attente de validation"
+                         alt="En attente"/>
+                </span>
+                <span *ngIf="applicant.status">
+                    <img src="/assets/check.png"
+                         title="Toutes les candidatures sont validées"
+                         height="4.5%"
+                         alt="Tout validé"/>
+                </span>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   [pageSize]="10"
+                   [length]="sizeApplicant"
+                   showFirstLastButtons
+                   (page)="pageEvent = $event; onChange();"
+    >
+
+    </mat-paginator>
+</div>

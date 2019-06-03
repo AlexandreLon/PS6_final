@@ -1,0 +1,53 @@
+<header class="header">
+    <table>
+        <table>
+            <td class="logo">
+                <a href="/" style="text-decoration: none;">
+                    <img
+                        src="/assets/polytechLogo.svg"
+                        height="50px"
+                    />
+                </a>
+            </td>
+            <td class="bri">
+                BRI
+            </td>
+        </table>
+        <td class="buttons" align="right">
+            <table>
+                <td class="linkContainer">
+                    <a routerLink="/iro/" class="menu-link" *ngIf="this.href != '/iro' ">
+                        Accueil
+                    </a>
+                    <a routerLink="/iro/" class="menu-link-clicked" *ngIf="this.href == '/iro' ">
+                        Accueil
+                    </a>
+                </td>
+                <td class="linkContainer">
+                    <a routerLink="/iro/applicants" class="menu-link" *ngIf="this.href != '/iro/applicants'">
+                        Candidats
+                    </a>
+                    <a routerLink="/iro/applicants" class="menu-link-clicked" *ngIf="this.href == '/iro/applicants' ">
+                        Candidats
+                    </a>
+                </td>
+                <td class="linkContainer">
+                    
+                    <!-- <a matBadge="{{numberAppointement}}" matBadgeOverlap="false" matBadgeColor="warn" routerLink="/iro/appointments/" class="menu-link" *ngIf="this.href != '/iro/appointments' "> -->
+
+                    <a routerLink="/iro/appointments/" class="menu-link" *ngIf="this.href != '/iro/appointments' ">
+                        Rendez-vous
+                        <div class="awaiting-badge" *ngIf="numberAppointement > 0"
+                              title="{{numberAppointement}} rendez-vous en attente">
+                            {{numberAppointement}}
+                        </div>
+                    </a>
+                    <a routerLink="/iro/appointments/" class="menu-link-clicked"
+                       *ngIf="this.href == '/iro/appointments' ">
+                        Rendez-vous
+                    </a>
+                </td>
+            </table>
+        </td>
+    </table>
+</header>

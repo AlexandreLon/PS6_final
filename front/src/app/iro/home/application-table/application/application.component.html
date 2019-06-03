@@ -1,0 +1,28 @@
+<mat-card class="application" (click)="selectApplication(application.applicant.id)">
+    <mat-grid-list cols="5" rowHeight="20px">
+        <mat-grid-tile>
+            <div class="uppercase">{{ application.applicant.lastname }}</div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="">{{ application.applicant.firstname}}</div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="">{{ application.category}}</div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="">Le {{application.date * 1000 | date: 'dd/MM'}}</div>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="application.status">
+            <img src="/assets/check.png"
+                 title="Candidature validée"
+                 height="100%"
+                 alt="Validée"/>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="!application.status">
+            <img src="/assets/exclamation-mark.png"
+                 title="Candidature en attente de validation"
+                 height="100%"
+                 alt="En attente"/>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-card>

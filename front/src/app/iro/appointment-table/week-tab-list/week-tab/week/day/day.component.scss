@@ -1,0 +1,38 @@
+tr {
+    border: 1px solid;
+}
+
+table{
+    height: 200px;
+    width: 100%;
+    border: 1px solid;
+}
+
+.dayName {
+    font-size: 11px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #939393;
+}
+.day-container{
+    height: 100%;
+    border: 2px solid black;
+}
+
+.mat-divider-absolute{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding: 0px;
+}
+
+hr {
+    margin-top: 1px;
+    margin-bottom: 1px;
+    text-align: center;
+}
+
+app-appointment{
+    width: 100%;
+    height: 100%;
+}
