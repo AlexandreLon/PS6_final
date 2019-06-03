@@ -1,33 +1,42 @@
 const {Router} = require('express');
 const {Appointment, RealTimeAppointment} = require('../../models');
 
-function attachRealTimeAppointment(realTimeAppointment) {
-  const realTimeApp = realTimeAppointment;
-  realTimeApp.appointment = Appointment.getById(realTimeAppointment.appointment_id);
-  return realTimeApp;
+function attachRealTimeAppointment(listOfAppointment) {
+  var i = 1;
+  listOfAppointment.forEach(app => {
+    RealTimeAppointment.create({
+      id: i,
+      real_timestamp: app.starting_date,
+      appointment_id: app.id,
+    })
+    i++;
+  });
+  return RealTimeAppointment.get();
 }
 
-function createRealTimeAppointmentsOfDay() {
+function getAppointmentsOfDay() {
   const CURRENT_TIME = new Date();
+  const CURRENT_TIME_LOG = CURRENT_TIME.getTime();
   const DAY = CURRENT_TIME.getDate();
   const MONTH = CURRENT_TIME.getMonth();
   const YEAR = CURRENT_TIME.getFullYear();
   const END_OF_DAY = new Date(YEAR, MONTH, DAY, 23, 59, 59);
-  const realTimeAppointmentsOfDay = Appointment.get().filter(e => (e.starting_date > (CURRENT_TIME.getTime() / 1000)) && (e.starting_date < END_OF_DAY));
+  const END_OF_DAY_LOG = END_OF_DAY.getTime();
+  const realTimeAppointmentsOfDay = Appointment.get().filter(e => ((e.starting_date > (CURRENT_TIME.getTime() / 1000)) && (e.starting_date < (END_OF_DAY.getTime() / 1000))));
   return realTimeAppointmentsOfDay;
 
 }
 
 const router = new Router();
 
-router.get('/', (req, res) => res.status(200).json(RealTimeAppointment.get().map(realTimeAppointment => attachRealTimeAppointment(realTimeAppointment))));
+//router.get('/', (req, res) => res.status(200).json(RealTimeAppointment.get().map(realTimeAppointment => attachRealTimeAppointment(realTimeAppointment))));
 router.get('/:id', (req, res) => res.status(200).json(attachRealTimeAppointment(RealTimeAppointment.getById(req.params.id))));
 router.delete('/:id', (req, res) => res.status(200).json(RealTimeAppointment.delete(req.params.id)));
 router.put('/:id', (req, res) => res.status(200).json(RealTimeAppointment.update(req.params.id, req.body)));
-router.post('/', (req, res) => {
+router.get('/', (req, res) => {
   try {
-    const realTimeAppointment = RealTimeAppointment.create(createRealTimeAppointmentsOfDay());
-    res.status(201).json(attachRealTimeAppointment(realTimeAppointment));
+    const appointmentOfTheDay = getAppointmentsOfDay();
+    res.status(200).json(attachRealTimeAppointment(appointmentOfTheDay));
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra);
