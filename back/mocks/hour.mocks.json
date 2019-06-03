@@ -1,1 +1,202 @@
-[]
+[
+  {
+    "id": 0,
+    "hour": 8,
+    "minute": 0
+  },
+  {
+    "id": 1,
+    "hour": 8,
+    "minute": 15
+  },
+  {
+    "id": 2,
+    "hour": 8,
+    "minute": 30
+  },
+  {
+    "id": 3,
+    "hour": 8,
+    "minute": 45
+  },
+  {
+    "id": 4,
+    "hour": 9,
+    "minute": 0
+  },
+  {
+    "id": 5,
+    "hour": 9,
+    "minute": 15
+  },
+  {
+    "id": 6,
+    "hour": 9,
+    "minute": 30
+  },
+  {
+    "id": 7,
+    "hour": 9,
+    "minute": 45
+  },
+  {
+    "id": 8,
+    "hour": 10,
+    "minute": 0
+  },
+  {
+    "id": 9,
+    "hour": 10,
+    "minute": 15
+  },
+  {
+    "id": 10,
+    "hour": 10,
+    "minute": 30
+  },
+  {
+    "id": 11,
+    "hour": 10,
+    "minute": 45
+  },
+  {
+    "id": 12,
+    "hour": 11,
+    "minute": 0
+  },
+  {
+    "id": 13,
+    "hour": 11,
+    "minute": 15
+  },
+  {
+    "id": 14,
+    "hour": 11,
+    "minute": 30
+  },
+  {
+    "id": 15,
+    "hour": 11,
+    "minute": 45
+  },
+  {
+    "id": 16,
+    "hour": 12,
+    "minute": 0
+  },
+  {
+    "id": 17,
+    "hour": 12,
+    "minute": 15
+  },
+  {
+    "id": 18,
+    "hour": 12,
+    "minute": 30
+  },
+  {
+    "id": 19,
+    "hour": 12,
+    "minute": 45
+  },
+  {
+    "id": 20,
+    "hour": 13,
+    "minute": 0
+  },
+  {
+    "id": 21,
+    "hour": 13,
+    "minute": 15
+  },
+  {
+    "id": 22,
+    "hour": 13,
+    "minute": 30
+  },
+  {
+    "id": 23,
+    "hour": 13,
+    "minute": 45
+  },
+  {
+    "id": 24,
+    "hour": 14,
+    "minute": 0
+  },
+  {
+    "id": 25,
+    "hour": 14,
+    "minute": 15
+  },
+  {
+    "id": 26,
+    "hour": 14,
+    "minute": 30
+  },
+  {
+    "id": 27,
+    "hour": 14,
+    "minute": 45
+  },
+  {
+    "id": 28,
+    "hour": 15,
+    "minute": 0
+  },
+  {
+    "id": 29,
+    "hour": 15,
+    "minute": 15
+  },
+  {
+    "id": 30,
+    "hour": 15,
+    "minute": 30
+  },
+  {
+    "id": 31,
+    "hour": 15,
+    "minute": 45
+  },
+  {
+    "id": 32,
+    "hour": 16,
+    "minute": 0
+  },
+  {
+    "id": 33,
+    "hour": 16,
+    "minute": 15
+  },
+  {
+    "id": 34,
+    "hour": 16,
+    "minute": 30
+  },
+  {
+    "id": 35,
+    "hour": 16,
+    "minute": 45
+  },
+  {
+    "id": 36,
+    "hour": 17,
+    "minute": 0
+  },
+  {
+    "id": 37,
+    "hour": 17,
+    "minute": 15
+  },
+  {
+    "id": 38,
+    "hour": 17,
+    "minute": 30
+  },
+  {
+    "id": 39,
+    "hour": 17,
+    "minute": 45
+  }
+]
