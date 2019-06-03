@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	"start": "node app/index.js",
-	"clear": "node app/utils/clear.js",
+    "start": "node app/index.js",
+    "clear": "node app/utils/clear.js",
     "seed": "node app/utils/seed.js",
     "dev": "./node_modules/.bin/nodemon app/index.js",
     "lint": "./node_modules/.bin/eslint -c .eslintrc.js app/",

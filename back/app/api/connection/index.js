@@ -5,9 +5,8 @@ const router = new Router();
 
 router.post('/', (req, res) => {
   const form = req.body;
-  if(form.firstname == null || form.lastname == null)
-  {
-	  res.status(400).json("Bad request");
+  if (form.firstname == null || form.lastname == null) {
+	  res.status(400).json('Bad request');
 	  return;
   }
   const applicants = Applicant.get();
@@ -20,7 +19,7 @@ router.post('/', (req, res) => {
     const applicant = applicants[i];
     if (applicant.firstname == form.firstname && applicant.lastname == form.lastname) {
       res.status(200).json(applicant);
-      return
+      return;
     }
   }
   res.status(403);

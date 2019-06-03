@@ -1,5 +1,5 @@
-const { Router } = require('express');
-const { Appointment, Applicant } = require('../../models');
+const {Router} = require('express');
+const {Appointment, Applicant} = require('../../models');
 
 function attachApplicant(appointment) {
   const app = appointment;
@@ -10,11 +10,7 @@ function attachApplicant(appointment) {
 function getFirstMondayOfCurrentYear() {
   const year = new Date().getFullYear();
   let date = new Date(year, 0, 1);
-  for (
-    let i = 0;
-    date.getDay() !== 1 && i < 14;
-    i++, date = new Date(year, 0, i + 1)
-  ) {
+  for (let i = 0; date.getDay() !== 1 && i < 14; i++, date = new Date(year, 0, i + 1)) {
   }
   return Math.trunc(date.getTime() / 1000) - date.getTimezoneOffset() * 60;
 }
@@ -49,33 +45,27 @@ function getTwoWeeksListOfAwaitingAppointments() {
 
 const router = new Router();
 router.get('/next/:nb', (req, res) => {
-	if(/[0-9]+/.test(req.params.nb))
-	{
-		let list = Appointment.get().filter(a => a.starting_date + new Date().getTimezoneOffset() * 60 > Date.now() / 1000 && a.status);
-		list.sort((a, b) => a.starting_date - b.starting_date);
-		list = list.splice(0, req.params.nb);
-		res.status(200).json(list.map(appointment => attachApplicant(appointment)));
-	}
-	else
-	{
-		res.status(400).json("Bad request")
-	}
+  if (/[0-9]+/.test(req.params.nb)) {
+    let list = Appointment.get().filter(a => a.starting_date + new Date().getTimezoneOffset() * 60 > Date.now() / 1000 && a.status);
+    list.sort((a, b) => a.starting_date - b.starting_date);
+    list = list.splice(0, req.params.nb);
+    res.status(200).json(list.map(appointment => attachApplicant(appointment)));
+  } else {
+    res.status(400).json('Bad request');
+  }
 });
 router.get('/numberAfterToday', (req, res) => res.status(200).json(Appointment.get().filter(e => e.starting_date > new Date().getTime() / 1000 && !e.status).length));
 router.get('/week/:timestamp', (req, res) => {
-	if(/[0-9]+/.test(req.params.timestamp))
-	{
-		const WEEK_DURATION = 604800;
-		const list = Appointment.get().filter(
-		a => a.starting_date > parseInt(req.params.timestamp)
-			&& (a.starting_date < (parseInt(req.params.timestamp) + WEEK_DURATION * 2)),
-		);
-		res.status(200).json(list.map(appointment => attachApplicant(appointment)));
-	}
-	else
-	{
-		res.status(400).json("Bad request")
-	}
+  if (/[0-9]+/.test(req.params.timestamp)) {
+    const WEEK_DURATION = 604800;
+    const list = Appointment.get().filter(
+      a => a.starting_date > parseInt(req.params.timestamp)
+        && (a.starting_date < (parseInt(req.params.timestamp) + WEEK_DURATION * 2)),
+    );
+    res.status(200).json(list.map(appointment => attachApplicant(appointment)));
+  } else {
+    res.status(400).json('Bad request');
+  }
 });
 router.get('/arrayAwaiting', (req, res) => res.status(200).json(getTwoWeeksListOfAwaitingAppointments()));
 router.get('/', (req, res) => res.status(200).json(Appointment.get().map(appointment => attachApplicant(appointment))));
