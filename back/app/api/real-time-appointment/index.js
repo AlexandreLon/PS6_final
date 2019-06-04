@@ -1,5 +1,5 @@
-const {Router} = require('express');
-const {Appointment, RealTimeAppointment, Applicant} = require('../../models');
+const { Router } = require('express');
+const { Appointment, RealTimeAppointment, Applicant } = require('../../models');
 
 let dayHasBegun = null;
 
@@ -24,17 +24,16 @@ function createRealTimeAppointments(listOfAppointment) {
   return RealTimeAppointment.get();
 }
 
-function attachApplicant(realTimeAppointment)
-{
-  if(realTimeAppointment == null) return null;
-  let appointment = Appointment.getById(realTimeAppointment.appointment_id);
-  let applicant = Applicant.getById(appointment.applicant_id);
-  realTimeAppointment.applicant_id = applicant.id
-    console.log(appointment)
-    console.log(applicant)
-    console.log(applicant.id)
-    console.log(realTimeAppointment)
-    return realTimeAppointment;
+function attachApplicant(realTimeAppointment) {
+  if (realTimeAppointment == null) return null;
+  const appointment = Appointment.getById(realTimeAppointment.appointment_id);
+  const applicant = Applicant.getById(appointment.applicant_id);
+  realTimeAppointment.applicant_id = applicant.id;
+  console.log(appointment);
+  console.log(applicant);
+  console.log(applicant.id);
+  console.log(realTimeAppointment);
+  return realTimeAppointment;
 }
 
 function getAppointmentsOfDay() {

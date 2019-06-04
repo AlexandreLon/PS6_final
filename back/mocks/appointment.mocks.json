@@ -3699,15 +3699,6 @@
     "status": true
   },
   {
-    "id": 411,
-    "applicant_id": 41,
-    "starting_date": 1552482900,
-    "ending_date": 1552483800,
-    "type": "Questions dossier de candidature",
-    "object": "J'aimerais avoir des détails sur mon dossier.",
-    "status": true
-  },
-  {
     "id": 412,
     "applicant_id": 39,
     "starting_date": 1557853200,
