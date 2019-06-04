@@ -11,6 +11,7 @@ public class Appointment
     private String type;
     private String object;
     private Date starting_date;
+
     private Applicant applicant;
 
     public Appointment(int appointment_id, String type, String object, Date starting_date, Applicant applicant)
@@ -46,5 +47,20 @@ public class Appointment
 
     public Date getStarting_date() {
         return starting_date;
+    }
+
+    public Applicant getApplicant() {
+        return applicant;
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "appointment_id=" + appointment_id +
+                ", type='" + type + '\'' +
+                ", object='" + object + '\'' +
+                ", starting_date=" + starting_date +
+                ", applicant=" + applicant +
+                '}';
     }
 }
