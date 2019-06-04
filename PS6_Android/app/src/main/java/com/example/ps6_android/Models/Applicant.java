@@ -3,6 +3,8 @@ package com.example.ps6_android.Models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Observable;
+
 public class Applicant
 {
     private int applicant_id;
@@ -25,7 +27,7 @@ public class Applicant
 
     public Applicant(JSONObject object) throws JSONException
     {
-        this(object.getInt("id"), object.getString("firstname"), object.getString("lastname"), object.getBoolean("turn"));
+        this(object.getInt("id"), object.getString("firstname"), object.getString("lastname"), false);
     }
 
 
