@@ -1,5 +1,5 @@
-const {Router} = require('express');
-const {Appointment, Applicant} = require('../../models');
+const { Router } = require('express');
+const { Appointment, Applicant } = require('../../models');
 
 function attachApplicant(appointment) {
   const app = appointment;

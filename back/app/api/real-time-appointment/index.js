@@ -1,5 +1,5 @@
-const { Router } = require('express');
-const { Appointment, RealTimeAppointment } = require('../../models');
+const {Router} = require('express');
+const {Appointment, RealTimeAppointment} = require('../../models');
 
 let dayHasBegun = null;
 
@@ -37,12 +37,24 @@ function getAppointmentsOfDay() {
   return realTimeAppointmentsOfDay;
 }
 
+function popNextAppointmentOfDay() {
+  const appointmentsOfDay = getAppointmentsOfDay();
+  let realTimeAppointmentsOfDay = createRealTimeAppointments(appointmentsOfDay);
+  realTimeAppointmentsOfDay = realTimeAppointmentsOfDay.sort((e1, e2) => e1.real_timestamp - e2.real_timestamp);
+  if (realTimeAppointmentsOfDay.length > 0) {
+    const popped = realTimeAppointmentsOfDay[0];
+    RealTimeAppointment.delete(popped.id);
+    return popped;
+  }
+  return null;
+}
+
 const router = new Router();
 
 router.get('/', (req, res) => {
   try {
-    const appointmentOfTheDay = getAppointmentsOfDay();
-    res.status(200).json(createRealTimeAppointments(appointmentOfTheDay));
+    const appointmentsOfDay = getAppointmentsOfDay();
+    res.status(200).json(createRealTimeAppointments(appointmentsOfDay));
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra);
@@ -51,6 +63,8 @@ router.get('/', (req, res) => {
     }
   }
 });
+
+router.get('/pop', (req, res) => res.status(200).json(popNextAppointmentOfDay()));
 router.delete('/:id', (req, res) => res.status(200).json(RealTimeAppointment.delete(req.params.id)));
 router.put('/:id', (req, res) => res.status(200).json(RealTimeAppointment.update(req.params.id, req.body)));
 
