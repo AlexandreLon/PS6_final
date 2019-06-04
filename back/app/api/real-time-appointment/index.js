@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const {Appointment, RealTimeAppointment} = require('../../models');
+const {Appointment, RealTimeAppointment, Applicant} = require('../../models');
 
 let dayHasBegun = null;
 
@@ -24,6 +24,19 @@ function createRealTimeAppointments(listOfAppointment) {
   return RealTimeAppointment.get();
 }
 
+function attachApplicant(realTimeAppointment)
+{
+  if(realTimeAppointment == null) return null;
+  let appointment = Appointment.getById(realTimeAppointment.appointment_id);
+  let applicant = Applicant.getById(appointment.applicant_id);
+  realTimeAppointment.applicant_id = applicant.id
+    console.log(appointment)
+    console.log(applicant)
+    console.log(applicant.id)
+    console.log(realTimeAppointment)
+    return realTimeAppointment;
+}
+
 function getAppointmentsOfDay() {
   const CURRENT_TIME = new Date();
   const DAY = CURRENT_TIME.getDate();
@@ -38,7 +51,7 @@ function getAppointmentsOfDay() {
 }
 
 function popNextAppointmentOfDay() {
-  const appointmentsOfDay = getAppointmentsOfDay();
+  const appointmentsOfDay = getAppointmentsOfDay().sort((e1, e2) => e1.starting_date - e2.starting_date);
   let realTimeAppointmentsOfDay = createRealTimeAppointments(appointmentsOfDay);
   realTimeAppointmentsOfDay = realTimeAppointmentsOfDay.sort((e1, e2) => e1.real_timestamp - e2.real_timestamp);
   if (realTimeAppointmentsOfDay.length > 0) {
@@ -64,7 +77,7 @@ router.get('/', (req, res) => {
   }
 });
 
-router.get('/pop', (req, res) => res.status(200).json(popNextAppointmentOfDay()));
+router.get('/pop', (req, res) => res.status(200).json(attachApplicant(popNextAppointmentOfDay())));
 router.delete('/:id', (req, res) => res.status(200).json(RealTimeAppointment.delete(req.params.id)));
 router.put('/:id', (req, res) => res.status(200).json(RealTimeAppointment.update(req.params.id, req.body)));
 
