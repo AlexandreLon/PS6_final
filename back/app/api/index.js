@@ -4,6 +4,7 @@ const AppointmentRouter = require('./appointment');
 const ApplicationRouter = require('./application');
 const ConnectionRouter = require('./connection');
 const AvailabilitiesRouter = require('./availabilities');
+const RealTimeAppointmentRouter = require('./real-time-appointment');
 
 const router = new Router();
 router.get('/status', (req, res) => res.status(200).json('ok'));
@@ -12,5 +13,6 @@ router.use('/applications', ApplicationRouter);
 router.use('/appointments', AppointmentRouter);
 router.use('/connection', ConnectionRouter);
 router.use('/availabilities', AvailabilitiesRouter);
+router.use('/real-time-appointment', RealTimeAppointmentRouter);
 
 module.exports = router;

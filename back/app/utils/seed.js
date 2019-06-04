@@ -562,7 +562,7 @@ for (i = 0; i < 100; i++) {
 console.log('Applications created with success');
 console.log('Creating Appointments');
 
-for (i = 0; i < 100; i++) {
+for (i = 0; i < 1000; i++) {
   const after = getRandomNumber(0, 5) == 0;
   let date;
   do {

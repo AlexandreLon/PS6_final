@@ -1,0 +1,352 @@
+[
+  {
+    "id": 0,
+    "priority": 1,
+    "university": "The University of Northumbria at Newcastle",
+    "country": "Royaume-Uni",
+    "in_charge_teacher": "Mr Long"
+  },
+  {
+    "id": 1,
+    "priority": 2,
+    "university": "AGH University of Science & Technology",
+    "country": "Pologne",
+    "in_charge_teacher": "Mr Blanc"
+  },
+  {
+    "id": 2,
+    "priority": 3,
+    "university": "Université de Mons",
+    "country": "Belgique",
+    "in_charge_teacher": "Mme Case"
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "university": "University of Granada",
+    "country": "Espagne",
+    "in_charge_teacher": "Mr Chigno"
+  },
+  {
+    "id": 4,
+    "priority": 2,
+    "university": "The University of Northumbria at Newcastle",
+    "country": "Royaume-Uni",
+    "in_charge_teacher": "Mr Chigno"
+  },
+  {
+    "id": 5,
+    "priority": 3,
+    "university": "Université de Mons",
+    "country": "Belgique",
+    "in_charge_teacher": "Mr Chigno"
+  },
+  {
+    "id": 6,
+    "priority": 1,
+    "university": "The University of Northumbria at Newcastle",
+    "country": "Royaume-Uni",
+    "in_charge_teacher": "Mr Long"
+  },
+  {
+    "id": 7,
+    "priority": 2,
+    "university": "Université de Mons",
+    "country": "Belgique",
+    "in_charge_teacher": "Mr Blanc"
+  },
+  {
+    "id": 8,
+    "priority": 3,
+    "university": "AGH University of Science & Technology",
+    "country": "Pologne",
+    "in_charge_teacher": "Mme Case"
+  },
+  {
+    "id": 9,
+    "priority": 1,
+    "university": "Universita degli Studi di Verona",
+    "country": "Italie",
+    "in_charge_teacher": "Mme Case"
+  },
+  {
+    "id": 10,
+    "priority": 1,
+    "university": "Université de Danang",
+    "country": "Vietnam",
+    "in_charge_teacher": "Mme Coletta"
+  },
+  {
+    "id": 11,
+    "priority": 2,
+    "university": "Asian Institute of Technology",
+    "country": "Vietnam",
+    "in_charge_teacher": "Mr Long"
+  },
+  {
+    "id": 12,
+    "priority": 3,
+    "university": "Asian Institute of Technology",
+    "country": "Vietnam",
+    "in_charge_teacher": "Mme Case"
+  },
+  {
+    "id": 13,
+    "priority": 1,
+    "university": "Tongji University",
+    "country": "Chine",
+    "in_charge_teacher": "Mme Case"
+  },
+  {
+    "id": 14,
+    "priority": 2,
+    "university": "Xi'an Jiaotong University",
+    "country": "Chine",
+    "in_charge_teacher": "Mme Case"
+  },
+  {
+    "id": 15,
+    "priority": 3,
+    "university": "City University Hong Kong",
+    "country": "Chine",
+    "in_charge_teacher": "Mr Long"
+  },
+  {
+    "id": 16,
+    "priority": 1,
+    "university": "City University Hong Kong",
+    "country": "Chine",
+    "in_charge_teacher": "Mr Chigno"
+  },
+  {
+    "id": 17,
+    "priority": 2,
+    "university": "Université de Danang",
+    "country": "Vietnam",
+    "in_charge_teacher": "Mr Blanc"
+  },
+  {
+    "id": 18,
+    "priority": 3,
+    "university": "City University Hong Kong",
+    "country": "Chine",
+    "in_charge_teacher": "Mme Coletta"
+  },
+  {
+    "id": 19,
+    "priority": 1,
+    "university": "Tongji University",
+    "country": "Chine",
+    "in_charge_teacher": "Mr Chigno"
+  },
+  {
+    "id": 20,
+    "priority": 1,
+    "university": "University of Windsor",
+    "country": "Canada",
+    "in_charge_teacher": "Mme Coletta"
+  },
+  {
+    "id": 21,
+    "priority": 2,
+    "university": "University of Windsor",
+    "country": "Canada",
+    "in_charge_teacher": "Mme Case"
+  },
+  {
+    "id": 22,
+    "priority": 3,
+    "university": "University of Oklahoma",
+    "country": "USA",
+    "in_charge_teacher": "Mme Prune"
+  },
+  {
+    "id": 23,
+    "priority": 1,
+    "university": "University of Windsor",
+    "country": "Canada",
+    "in_charge_teacher": "Mme Coletta"
+  },
+  {
+    "id": 24,
+    "priority": 2,
+    "university": "University of Oklahoma",
+    "country": "USA",
+    "in_charge_teacher": "Mr Chigno"
+  },
+  {
+    "id": 25,
+    "priority": 3,
+    "university": "University of Oklahoma",
+    "country": "USA",
+    "in_charge_teacher": "Mme Coletta"
+  },
+  {
+    "id": 26,
+    "priority": 1,
+    "university": "Université Bishop",
+    "country": "Canada",
+    "in_charge_teacher": "Mr Chigno"
+  },
+  {
+    "id": 27,
+    "priority": 2,
+    "university": "University of Windsor",
+    "country": "Canada",
+    "in_charge_teacher": "Mr Blanc"
+  },
+  {
+    "id": 28,
+    "priority": 3,
+    "university": "University of Windsor",
+    "country": "Canada",
+    "in_charge_teacher": "Mr Blanc"
+  },
+  {
+    "id": 29,
+    "priority": 1,
+    "university": "Université du Québec à Trois-Rivières",
+    "country": "Canada",
+    "in_charge_teacher": "Mme Prune"
+  },
+  {
+    "id": 30,
+    "priority": 1,
+    "university": "Institut Africain d'Informatique",
+    "country": "Cameroun",
+    "in_charge_teacher": "Mme Case"
+  },
+  {
+    "id": 31,
+    "priority": 2,
+    "university": "Institut Africain d'Informatique",
+    "country": "Togo",
+    "in_charge_teacher": "Mr Long"
+  },
+  {
+    "id": 32,
+    "priority": 3,
+    "university": "Institut Africain d'Informatique",
+    "country": "Togo",
+    "in_charge_teacher": "Mr Long"
+  },
+  {
+    "id": 33,
+    "priority": 1,
+    "university": "Institut Africain d'Informatique",
+    "country": "Togo",
+    "in_charge_teacher": "Mme Case"
+  },
+  {
+    "id": 34,
+    "priority": 2,
+    "university": "Institut Africain d'Informatique",
+    "country": "Cameroun",
+    "in_charge_teacher": "Mme Coletta"
+  },
+  {
+    "id": 35,
+    "priority": 3,
+    "university": "Institut Africain d'Informatique",
+    "country": "Cameroun",
+    "in_charge_teacher": "Mme Case"
+  },
+  {
+    "id": 36,
+    "priority": 1,
+    "university": "Institut Africain d'Informatique",
+    "country": "Cameroun",
+    "in_charge_teacher": "Mme Prune"
+  },
+  {
+    "id": 37,
+    "priority": 2,
+    "university": "Institut Africain d'Informatique",
+    "country": "Cameroun",
+    "in_charge_teacher": "Mr Long"
+  },
+  {
+    "id": 38,
+    "priority": 3,
+    "university": "Institut Africain d'Informatique",
+    "country": "Cameroun",
+    "in_charge_teacher": "Mr Long"
+  },
+  {
+    "id": 39,
+    "priority": 1,
+    "university": "Institut Africain d'Informatique",
+    "country": "Togo",
+    "in_charge_teacher": "Mme Coletta"
+  },
+  {
+    "id": 40,
+    "priority": 1,
+    "university": "Politecnico di Bari",
+    "country": "Italie",
+    "in_charge_teacher": "Mme Prune"
+  },
+  {
+    "id": 41,
+    "priority": 2,
+    "university": "Universidad Nacional del Litoral",
+    "country": "Argentine",
+    "in_charge_teacher": "Mr Long"
+  },
+  {
+    "id": 42,
+    "priority": 3,
+    "university": "Instituto Federal do Espirito Santo IFES",
+    "country": "Brésil",
+    "in_charge_teacher": "Mme Coletta"
+  },
+  {
+    "id": 43,
+    "priority": 1,
+    "university": "Bern University of Applied Sciences",
+    "country": "Suisse",
+    "in_charge_teacher": "Mr Chigno"
+  },
+  {
+    "id": 44,
+    "priority": 2,
+    "university": "Université Abdelmalek Essaadi",
+    "country": "Maroc",
+    "in_charge_teacher": "Mr Chigno"
+  },
+  {
+    "id": 45,
+    "priority": 3,
+    "university": "Universidad Nacional del Litoral",
+    "country": "Argentine",
+    "in_charge_teacher": "Mr Chigno"
+  },
+  {
+    "id": 46,
+    "priority": 1,
+    "university": "Bern University of Applied Sciences",
+    "country": "Suisse",
+    "in_charge_teacher": "Mr Chigno"
+  },
+  {
+    "id": 47,
+    "priority": 2,
+    "university": "Politecnico di Bari",
+    "country": "Italie",
+    "in_charge_teacher": "Mme Case"
+  },
+  {
+    "id": 48,
+    "priority": 3,
+    "university": "Bern University of Applied Sciences",
+    "country": "Suisse",
+    "in_charge_teacher": "Mr Blanc"
+  },
+  {
+    "id": 49,
+    "priority": 1,
+    "university": "Instituto Federal do Espirito Santo IFES",
+    "country": "Brésil",
+    "in_charge_teacher": "Mme Coletta"
+  }
+]
