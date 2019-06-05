@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.util.Log;
@@ -22,16 +23,23 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView identifiant;
-    private TextView bri1;
-    private TextView bri2;
-    private TextView objet;
-    private TextView heure;
-    private TextView description;
-
 
     Applicant applicant;
+    TextView identifier;
+    TextView bri1;
+    TextView bri2;
+    TextView object;
+    TextView hour;
+    TextView description;
+
+    TextView identificationFirstPers;
+    TextView identificationFirstPers2;
+
+    RelativeLayout linearLayout;
+
+    Button changeView;
     MqttDataReceiver receiver;
+    String currentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,39 +48,68 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        identifiant = findViewById(R.id.identifiant);
-        bri1 = findViewById(R.id.bri);
-        bri2 = findViewById(R.id.bri2);
-        objet = findViewById(R.id.objet2);
-        heure = findViewById(R.id.heure2);
-        description = findViewById(R.id.description2);
         receiver = new MqttDataReceiver();
         this.registerReceiver(receiver, new IntentFilter("DATA_CHANGED"));
+        identifier = findViewById(R.id.identifier);
+        bri1 = findViewById(R.id.bri);
+        bri2 = findViewById(R.id.bri2);
+        object = findViewById(R.id.object2);
+        hour = findViewById(R.id.hour2);
+        description = findViewById(R.id.description2);
+
+        identificationFirstPers = findViewById(R.id.identificationFirstPers);
+        identificationFirstPers2 = findViewById(R.id.identificationFirstPers2);
+
+        linearLayout = findViewById(R.id.linearLayout);
+
+        changeView = findViewById(R.id.changeView);
+
 
 
         startService(new Intent(this, MqttService.class));
 
         final RelativeLayout linearLayout = findViewById(R.id.linearLayout);
 
+        WebHelper.getAppointments("40", new WebHelper.CallBack() {
+            @Override
+            public void Callback(WebHelper.Result result) {
+                updateAppointment("coucou");
+                Log.d("result",result.body+"");
+            }
+        });
+
 
         boolean retard = false;
+        boolean disponible = false;
 
-        if(!retard){
+        identifier.setText("57");
+
+        if(!retard && disponible){
             Drawable drawablePic = getResources().getDrawable(R.drawable.rectangle_green);
             bri1.setText("Le BRI est disponible");
             bri2.setText("Vous pouvez vous rendre au bureau maintenant");
-            heure.setText("Lundi 3 juin: 15h45");
-            objet.setText("Remise du dossier de candidature");
+            hour.setText("Lundi 3 juin: 15h45");
+            object.setText("Remise du dossier de candidature");
             description.setText("Je veux mettre mon dossier et poser quelques questions");
             linearLayout.setBackground(drawablePic);
 
-        }else{
+        }else if (retard && !disponible){
             Drawable drawablePic = getResources().getDrawable(R.drawable.rectangle_orange);
             bri1.setText("RETARD: RDV décalé à 15h55");
             bri2.setText("Le BRI vous recevra avec du retard");
-            heure.setText("Lundi 3 juin: 15h45");
-            objet.setText("Remise du dossier de candidature");
+            hour.setText("Lundi 3 juin: 15h45");
+            object.setText("Remise du dossier de candidature");
             description.setText("Je veux mettre mon dossier et poser quelques questions");
+            linearLayout.setBackground(drawablePic);
+        }else if (!retard && !disponible){
+            Drawable drawablePic = getResources().getDrawable(R.drawable.rectangle);
+            bri1.setText("Ce n'est pas votre tour");
+            bri2.setText("Pas de retard à signaler");
+            hour.setText("Lundi 3 juin: 15h45");
+            object.setText("Remise du dossier de candidature");
+            description.setText("Je veux mettre mon dossier et poser quelques questions");
+            identificationFirstPers.setText("Passage en cours: ");
+            identificationFirstPers2.setText("Aucun");
             linearLayout.setBackground(drawablePic);
         }
 
@@ -83,7 +120,13 @@ public class MainActivity extends AppCompatActivity {
      */
     public void updateView(String id){
         Log.d("update",id+"");
-        identifiant.setText(id);
+        currentId = id;
+        identificationFirstPers2.setText(id);
+    }
+
+    public void updateAppointment(String json){
+        Log.d("updateApt",json+"");
+
     }
 
     public class MqttDataReceiver extends BroadcastReceiver {
