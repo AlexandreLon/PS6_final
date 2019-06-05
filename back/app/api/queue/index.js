@@ -53,7 +53,7 @@ function attachApplicant(realTimeAppointment) {
   if (realTimeAppointment == null) return null;
   const appointment = Appointment.getById(realTimeAppointment.appointment_id);
   const applicant = Applicant.getById(appointment.applicant_id);
-  realTimeAppointment.applicant_id = applicant.id;
+  realTimeAppointment.applicant = applicant;
   console.log(appointment);
   console.log(applicant);
   console.log(applicant.id);
