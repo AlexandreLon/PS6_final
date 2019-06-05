@@ -1,5 +1,7 @@
 const { Router } = require('express');
-const { Appointment, RealTimeAppointment, Applicant } = require('../../models');
+const {
+  Appointment, RealTimeAppointment, Applicant, Queue,
+} = require('../../models');
 
 let dayHasBegun = null;
 
@@ -37,10 +39,14 @@ function getAppointmentsOfDay() {
   return appointmentsOfDay;
 }
 
-function popNextAppointmentOfDay() {
-  const appointmentsOfDay = getAppointmentsOfDay().sort((e1, e2) => e1.starting_date - e2.starting_date);
+function popNextAppointmentOfDay(queueNumber) {
+  const appointmentsOfDay = getAppointmentsOfDay().sort(
+    (e1, e2) => e1.starting_date - e2.starting_date,
+  );
   let realTimeAppointmentsOfDay = createRealTimeAppointments(appointmentsOfDay);
-  realTimeAppointmentsOfDay = realTimeAppointmentsOfDay.sort((e1, e2) => e1.real_timestamp - e2.real_timestamp);
+  realTimeAppointmentsOfDay = realTimeAppointmentsOfDay.sort(
+    (e1, e2) => e1.real_timestamp - e2.real_timestamp,
+  );
   if (realTimeAppointmentsOfDay.length > 0) {
     const popped = realTimeAppointmentsOfDay[0];
     RealTimeAppointment.delete(popped.id);
@@ -61,9 +67,20 @@ function attachApplicant(realTimeAppointment) {
   return realTimeAppointment;
 }
 
-function createNewQueue(){
-  // queueList = Queue.get();
-
+function createNewQueue() {
+  const QUEUES = Queue.get();
+  let newQueue = [];
+  const newQueues = [];
+  for (let i = 0; i < QUEUES.length; i += 1) {
+    newQueue += QUEUES[i];
+  }
+  newQueue.sort((e1, e2) => e1.real_timestamp - e2.real_timestamp);
+  for (let i = 0; i < QUEUES.length + 1; i += 1) {
+    /* Queue.create({
+      real_time_appointments: [],
+    }); */
+    newQueues[i].real_time_appointments = [];
+  }
 }
 
 const router = new Router();
