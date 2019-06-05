@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const {Router} = require('express');
 const {
   Appointment, RealTimeAppointment, Applicant, Queue,
 } = require('../../models');
@@ -76,15 +76,15 @@ function createNewQueue() {
   }
   newQueue.sort((e1, e2) => e1.real_timestamp - e2.real_timestamp);
   for (let i = 0; i < QUEUES.length + 1; i += 1) {
-    /* Queue.create({
+    Queue.create({
       real_time_appointments: [],
-    }); */
+    });
     newQueues[i].real_time_appointments = [];
   }
   for (let i = 0; i < newQueue.length; i += 1) {
-    let queue = newQueues[i % newQueues.length];
-
+    newQueues[i % newQueues.length].real_time_appointments.push(newQueue[i]);
   }
+  return newQueues;
 }
 
 const router = new Router();
