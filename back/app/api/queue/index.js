@@ -81,6 +81,10 @@ function createNewQueue() {
     }); */
     newQueues[i].real_time_appointments = [];
   }
+  for (let i = 0; i < newQueue.length; i += 1) {
+    let queue = newQueues[i % newQueues.length];
+
+  }
 }
 
 const router = new Router();
