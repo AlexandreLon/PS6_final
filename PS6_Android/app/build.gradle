@@ -16,7 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    repositories{
+    repositories {
         maven {
             url "https://repo.eclipse.org/content/repositories/paho-releases/"
         }
@@ -30,7 +30,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation('org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'){
+    implementation('org.eclipse.paho:org.eclipse.paho.android.service:1.1.1') {
         exclude module: 'support-v4'
     }
 }
