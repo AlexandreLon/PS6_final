@@ -1,5 +1,6 @@
 package com.example.ps6_android;
 
+import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
     RelativeLayout linearLayout;
 
-    Button changeView;
     MqttDataReceiver receiver;
     String currentId;
+    Button changeViewButton;
+    Appointment currentAppointment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         linearLayout = findViewById(R.id.linearLayout);
 
-        changeView = findViewById(R.id.changeView);
+        changeViewButton = findViewById(R.id.changeView);
 
 
 
@@ -74,7 +77,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void Callback(WebHelper.Result result) {
                 updateAppointment("coucou");
-                Log.d("result",result.body+"");
+                if(result.statusCode == 200){
+                    try {
+                        currentAppointment = new Appointment(result.body);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    Log.d("error",result.error);
+                }
+
             }
         });
 
@@ -112,6 +125,12 @@ public class MainActivity extends AppCompatActivity {
             identificationFirstPers2.setText("Aucun");
             linearLayout.setBackground(drawablePic);
         }
+        changeViewButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), BRIActivity.class));
+            }
+        });
+
 
     }
 
@@ -125,9 +144,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateAppointment(String json){
+
+
+
         Log.d("updateApt",json+"");
 
     }
+
 
     public class MqttDataReceiver extends BroadcastReceiver {
 
@@ -143,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+
+
 
     }
 }

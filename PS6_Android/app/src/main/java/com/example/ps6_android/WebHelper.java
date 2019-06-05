@@ -211,8 +211,7 @@ public class WebHelper
 
     public static void getAppointments(String id, CallBack callback){
         Params param = new Params();
-        param.put("id",id);
-        service.get("appointments",param, callback);
+        service.get("appointments/" + id,param, callback);
     }
 
 
