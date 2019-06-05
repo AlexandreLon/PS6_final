@@ -1,9 +1,11 @@
 package com.example.ps6_android;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Observable;
 import android.os.IBinder;
 import android.util.Log;
@@ -23,6 +25,7 @@ public class MqttService extends Service {
     MqttHelper mqttHelper;
     Applicant applicant;
     private Observable<Applicant> applicantObservable;
+    public String data;
 
     public MqttService() {
     }
@@ -46,22 +49,34 @@ public class MqttService extends Service {
     }
 
     private void startMqtt(){
-        mqttHelper = new MqttHelper(getApplicationContext(), "test", new MqttHelper.recevice_callBack() {
+
+        MqttHelper mqttHelper = new MqttHelper(getApplicationContext(), "current_student_id", new MqttHelper.recevice_callBack() {
             @Override
             public void callback(Context ctx, JSONObject json) {
                 System.out.println(">>>>>" + json);
-                if(json == null)
-                {
-                    TextView textView = ((Activity)ctx.getApplicationContext()).findViewById(R.id.text);
-                    textView.setText("Aucun");
-                }
-                else
-                {
-                    TextView textView = ((Activity)ctx.getApplicationContext()).findViewById(R.id.text);
-                    textView.setText(json.toString());
+                try {
+                    data = json.getString("data");
+                    sendDataToActivity();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         });
+
+    }
+
+    private void sendDataToActivity()
+    {
+
+
+        /* Retrieve a PendingIntent that will perform a broadcast */
+        Intent sendData = new Intent();
+        sendData.setAction("DATA_CHANGED");
+        sendData.putExtra( "DATA",data);
+        sendBroadcast(sendData);
+        System.out.println("SEND INTENT");
+
 
     }
 }

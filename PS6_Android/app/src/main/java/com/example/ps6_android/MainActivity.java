@@ -1,5 +1,7 @@
 package com.example.ps6_android;
 
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.app.Activity;
 import android.content.Context;
@@ -20,8 +22,16 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextView identifiant;
+    private TextView bri1;
+    private TextView bri2;
+    private TextView objet;
+    private TextView heure;
+    private TextView description;
+
 
     Applicant applicant;
+    MqttDataReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,32 +40,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //startService(new Intent(this, MqttService.class));
-        MqttHelper mqttHelper = new MqttHelper(getApplicationContext(), "test", new MqttHelper.recevice_callBack() {
-            @Override
-            public void callback(Context ctx, JSONObject json) {
-                System.out.println(">>>>>" + json);
-                try {
-                    TextView textView = findViewById(R.id.text);
-                    textView.setText(json.getString("data"));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        identifiant = findViewById(R.id.identifiant);
+        bri1 = findViewById(R.id.bri);
+        bri2 = findViewById(R.id.bri2);
+        objet = findViewById(R.id.objet2);
+        heure = findViewById(R.id.heure2);
+        description = findViewById(R.id.description2);
+        receiver = new MqttDataReceiver();
+        this.registerReceiver(receiver, new IntentFilter("DATA_CHANGED"));
 
 
-        final TextView identifiant = findViewById(R.id.identifiant);
-        final TextView bri1 = findViewById(R.id.bri);
-        final TextView bri2 = findViewById(R.id.bri2);
-        final TextView objet = findViewById(R.id.objet2);
-        final TextView heure = findViewById(R.id.heure2);
-        final TextView description = findViewById(R.id.description2);
-
+        startService(new Intent(this, MqttService.class));
 
         final RelativeLayout linearLayout = findViewById(R.id.linearLayout);
-
 
 
         boolean retard = false;
@@ -77,6 +74,31 @@ public class MainActivity extends AppCompatActivity {
             objet.setText("Remise du dossier de candidature");
             description.setText("Je veux mettre mon dossier et poser quelques questions");
             linearLayout.setBackground(drawablePic);
+        }
+
+    }
+
+    /**
+     * Update the view with the json arguments
+     */
+    public void updateView(String id){
+        Log.d("update",id+"");
+        identifiant.setText(id);
+    }
+
+    public class MqttDataReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            Log.d("received","ok");
+            if(intent.getAction().equals("DATA_CHANGED"))
+            {
+
+
+                updateView(intent.getStringExtra("DATA"));
+
+            }
         }
 
     }
