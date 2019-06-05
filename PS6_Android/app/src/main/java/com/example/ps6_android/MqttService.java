@@ -34,7 +34,7 @@ public class MqttService extends Service {
     public void onCreate() {
 
         super.onCreate();
-        startMqtt();
+        //startMqtt();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class MqttService extends Service {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    private void startMqtt(){
+    /*private void startMqtt(){
 
         MqttHelper mqttHelper = new MqttHelper(getApplicationContext(), "current_student_id", new MqttHelper.recevice_callBack() {
             @Override
@@ -64,7 +64,7 @@ public class MqttService extends Service {
             }
         });
 
-    }
+    }*/
 
     private void sendDataToActivity()
     {
@@ -79,4 +79,14 @@ public class MqttService extends Service {
 
 
     }
+
+    private void sendClientToActivity(){
+        Intent sendData = new Intent();
+        sendData.setAction("DATA_CHANGED");
+        sendData.putExtra( "DATA",data);
+        sendBroadcast(sendData);
+        System.out.println("SEND INTENT");
+    }
+
+
 }
