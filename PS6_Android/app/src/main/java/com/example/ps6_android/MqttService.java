@@ -14,9 +14,6 @@ import android.widget.TextView;
 import com.example.ps6_android.Models.Applicant;
 import com.example.ps6_android.Models.Appointment;
 
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
