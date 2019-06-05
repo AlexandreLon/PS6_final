@@ -15,9 +15,14 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.security.auth.callback.Callback;
 
 public class MqttHelper {
+
 
     public interface recevice_callBack
     {
@@ -26,14 +31,14 @@ public class MqttHelper {
 
     public MqttAndroidClient mqttAndroidClient;
 
-    private final String serverUri = "tcp://192.168.43.82:1883";
+    private final String serverUri = "tcp://192.168.43.1:1883";
 
     private final String clientId = "AndroidClient";
-    private String subscriptionTopic = "ok";
+    private List<String> subscriptionTopics;
 
 
-    public MqttHelper(final Context context, String topic, final recevice_callBack callback){
-        subscriptionTopic = topic;
+    public MqttHelper(final Context context, List<String> topics, final recevice_callBack callback){
+        subscriptionTopics = topics;
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
         connect();
 
@@ -63,6 +68,8 @@ public class MqttHelper {
         //connect();
     }
 
+
+
     public void setCallback(MqttCallbackExtended callback) {
         mqttAndroidClient.setCallback(callback);
     }
@@ -86,7 +93,9 @@ public class MqttHelper {
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
-                    subscribeToTopic();
+                    for (int i =0;i<subscriptionTopics.size();i++){
+                        subscribeToTopic(subscriptionTopics.get(i));
+                    }
                 }
 
                 @Override
@@ -102,9 +111,9 @@ public class MqttHelper {
     }
 
 
-    private void subscribeToTopic() {
+    private void subscribeToTopic(String topicToSubscribe) {
         try {
-            mqttAndroidClient.subscribe(subscriptionTopic, 0, null, new IMqttActionListener() {
+            mqttAndroidClient.subscribe(topicToSubscribe, 0, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     Log.w("Mqtt","Subscribed!");
@@ -120,5 +129,15 @@ public class MqttHelper {
             System.err.println("Exception whilst subscribing");
             ex.printStackTrace();
         }
+    }
+
+    public void publishOnTopic(String topic, String messageToPublish){
+        MqttMessage message = new MqttMessage(messageToPublish.getBytes());
+        try {
+            mqttAndroidClient.publish(topic, message);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+
     }
 }

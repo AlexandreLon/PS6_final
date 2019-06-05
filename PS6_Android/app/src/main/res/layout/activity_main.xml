@@ -1,207 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical"
     tools:context=".MainActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-
-            <TextView
-                android:id="@+id/label-id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="VOTRE IDENTIFIANT :"
-                android:layout_centerHorizontal="true"
-                />
-
-            <TextView
-                android:id="@+id/identifier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/label-id"
-                android:layout_marginLeft="10px"
-                android:text="27"
-                />
-
-            <RelativeLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="357dp"
-                android:layout_height="105dp"
-                android:background="@drawable/rectangle_green"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                >
-
-                <TextView
-                    android:id="@+id/bri"
-                    android:layout_width="190dp"
-                    android:layout_height="45dp"
-                    android:layout_centerHorizontal="true"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:textColor="#000"
-                    android:layout_marginTop="10dp"
-                    android:textSize="20sp"
-                    />
-
-                <TextView
-                    android:id="@+id/bri2"
-                    android:layout_width="255dp"
-                    android:layout_height="41dp"
-                    android:layout_below="@id/bri"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:textAlignment="center"/>
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/identificationFirstPers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/linearLayout"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="20dp"
-                />
-
-            <TextView
-                android:id="@+id/identificationFirstPers2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/linearLayout"
-                android:layout_marginBottom="30dp"
-                android:textColor="#000"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="20dp"
-                android:layout_toEndOf="@+id/identificationFirstPers"
-                />
+    <TextView
+        android:id="@+id/idStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Afficheur"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
 
 
-            <TextView
-                android:id="@+id/details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Détails rendez-vous"
-                android:layout_below="@id/linearLayout"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginLeft="20dp"
-                />
+    <ImageButton
+        android:id="@+id/heap_before_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="80dp"
+        android:background="@null"
+        android:rotation="180"
+        android:tint="#3F51B5"
+        app:srcCompat="@android:drawable/ic_menu_send" />
 
-            <RelativeLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="352dp"
-                android:layout_height="380dp"
-                android:background="@drawable/rectangle"
-                android:layout_below="@id/details"
-                android:layout_centerHorizontal="true">
+    <TextView
+        android:id="@+id/heap_before_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Left"
+        android:layout_marginTop="85dp"
+        android:layout_toEndOf="@id/heap_before_button"/>
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="45dp"
-                    android:layout_height="37dp"
-                    android:tint="#D3001957"
-                    app:srcCompat="@android:drawable/ic_lock_idle_alarm"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="20dp" />
+    <TextView
+        android:id="@+id/heap_next_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Right"
+        android:layout_marginTop="85dp"
+        android:layout_toStartOf="@id/heap_next_button"
+        />
 
-                <TextView
-                    android:id="@+id/hour"
-                    android:layout_width="171dp"
-                    android:layout_height="25dp"
-                    android:text="Heure prévue initialement :"
-                    android:layout_toEndOf="@id/imageView"
-                    android:layout_marginTop="20dp"/>
-
-
-                <TextView
-                    android:id="@+id/hour2"
-                    android:layout_width="172dp"
-                    android:layout_height="37dp"
-                    android:layout_below="@id/hour"
-                    android:textColor="#000"
-                    android:layout_toEndOf="@id/imageView"/>
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="45dp"
-                    android:layout_height="37dp"
-                    android:tint="#D3001957"
-                    app:srcCompat="@android:drawable/sym_action_email"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="120dp"
-                    />
-
-                <TextView
-                    android:id="@+id/object"
-                    android:layout_width="167dp"
-                    android:layout_height="28dp"
-                    android:text="Objet :"
-                    android:layout_toRightOf="@id/imageView2"
-                    android:layout_marginTop="125dp"/>
-
-                <TextView
-                    android:id="@+id/object2"
-                    android:layout_width="207dp"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/object"
-                    android:textColor="#000"
-                    android:layout_toEndOf="@id/imageView2" />
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="45dp"
-                    android:layout_height="37dp"
-                    android:tint="#D3001957"
-                    app:srcCompat="@android:drawable/stat_notify_chat"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="240dp"/>
-
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="169dp"
-                    android:layout_height="35dp"
-                    android:text="Description :"
-                    android:layout_toEndOf="@+id/imageView3"
-                    android:layout_marginTop="245dp"/>
-
-                <TextView
-                    android:id="@+id/description2"
-                    android:layout_width="211dp"
-                    android:layout_height="59dp"
-                    android:textColor="#000"
-                    android:layout_below="@+id/description"
-                    android:layout_toEndOf="@+id/imageView3" />
+    <ImageButton
+        android:id="@+id/heap_next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="40dp"
+        android:background="@null"
+        android:tint="#3F51B5"
+        app:srcCompat="@android:drawable/ic_menu_send" />
 
 
-            </RelativeLayout>
+    <Button
+        android:id="@+id/add_heap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="80dp"
+        android:backgroundTint="#C650922B"
+        android:text="-"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
 
-            <Button
-                android:id="@+id/changeView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Change View"
-                android:layout_below="@id/linearLayout2"
-                android:layout_centerHorizontal="true"/>
-        </RelativeLayout>
+    <Button
+        android:id="@+id/supress_heap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:backgroundTint="#DF3535"
+        android:layout_marginLeft="50dp"
 
-    </ScrollView>
+        android:layout_toEndOf="@+id/add_heap"
+        android:text="+"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Afficheur"
+        android:layout_marginTop="300dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="100dp"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Afficheur"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_marginTop="300dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="40dp"
+        />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Afficheur"
+        android:layout_below="@id/textView"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Afficheur"
+        android:layout_below="@id/textView3"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Afficheur"
+        android:layout_below="@id/textView4"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
