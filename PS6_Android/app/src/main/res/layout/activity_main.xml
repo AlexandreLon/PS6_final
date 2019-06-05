@@ -15,7 +15,7 @@
         />
 
     <TextView
-        android:id="@+id/identifiant"
+        android:id="@+id/identifier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/label-id"
@@ -44,8 +44,31 @@
             android:layout_height="41dp"
             android:layout_below="@id/bri"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"/>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/identificationFirstPers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearLayout"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <TextView
+        android:id="@+id/identificationFirstPers2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearLayout"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@+id/identificationFirstPers"
+        />
+
 
     <TextView
         android:id="@+id/details"
@@ -54,7 +77,7 @@
         android:text="Détails rendez-vous"
         android:layout_below="@id/linearLayout"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="70dp"
         android:layout_marginLeft="20dp"
         />
 
@@ -76,7 +99,7 @@
             android:layout_marginTop="60dp" />
 
         <TextView
-            android:id="@+id/heure"
+            android:id="@+id/hour"
             android:layout_width="171dp"
             android:layout_height="25dp"
             android:text="Heure prévue initialement :"
@@ -85,10 +108,10 @@
 
 
         <TextView
-            android:id="@+id/heure2"
+            android:id="@+id/hour2"
             android:layout_width="172dp"
             android:layout_height="37dp"
-            android:layout_below="@id/heure"
+            android:layout_below="@id/hour"
             android:layout_toEndOf="@id/imageView"/>
 
         <ImageView
@@ -102,7 +125,7 @@
             />
 
         <TextView
-            android:id="@+id/objet"
+            android:id="@+id/object"
             android:layout_width="167dp"
             android:layout_height="28dp"
             android:text="Objet :"
@@ -110,10 +133,10 @@
             android:layout_marginTop="165dp"/>
 
         <TextView
-            android:id="@+id/objet2"
+            android:id="@+id/object2"
             android:layout_width="207dp"
             android:layout_height="45dp"
-            android:layout_below="@id/objet"
+            android:layout_below="@id/object"
             android:layout_toEndOf="@id/imageView2" />
 
         <ImageView
@@ -146,5 +169,13 @@
 
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/changeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:layout_below="@id/linearLayout2"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
