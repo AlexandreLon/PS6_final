@@ -4,6 +4,7 @@ const {
 } = require('../../models');
 
 let dayHasBegun = null;
+let CURRENT_QUEUE = 0;
 
 function createRealTimeAppointments(listOfAppointment, queueId) {
   let i = 1;
@@ -111,7 +112,17 @@ router.get('/', (req, res) => {
   }
 });
 
-router.get('/pop/:id', (req, res) => res.status(200).json(attachApplicant(popNextAppointmentOfDay(req.params.id))));
+router.get('/next', (req, res) => {
+	CURRENT_QUEUE = (CURRENT_QUEUE+1)%Queue.get().length;
+	res.status(200).json(CURRENT_QUEUE);
+});
+
+router.get('/prev', (req, res) => {
+	CURRENT_QUEUE = (CURRENT_QUEUE-1) < 0 ? Queue.get().length-1 : CURRENT_QUEUE-1
+	res.status(200).json(CURRENT_QUEUE);
+});
+
+router.get('/pop', (req, res) => res.status(200).json(attachApplicant(popNextAppointmentOfDay(CURRENT_QUEUE))));
 
 router.get('/', (req, res) => res.status(200).json(Queue.get()));
 
@@ -122,6 +133,27 @@ router.delete('/:id', (req, res) => res.status(200).json(RealTimeAppointment.del
 // router.put('/:id', (req, res) => res.status(200).json(RealTimeAppointment.update(req.params.id, req.body)));
 
 router.post('/', (req, res) => {
+	if (dayHasBegun == null || (dayHasBegun.getDate() !== new Date().getDate()
+		|| dayHasBegun.getMonth() !== new Date().getMonth()
+		|| dayHasBegun.getFullYear() !== new Date().getFullYear())) {
+		dayHasBegun = new Date();
+
+		RealTimeAppointment.get().forEach(e => RealTimeAppointment.delete(e.id));
+
+		listOfAppointment.forEach((app) => {
+		RealTimeAppointment.create({
+			id: i,
+			real_timestamp: app.starting_date,
+			appointment_id: app.id,
+		});
+		i += 1;
+		});
+		Queue.get().forEach(q => Queue.delete(q.id));
+		Queue.create({
+			id: 0,
+			real_time_appointments: RealTimeAppointment.get().map(e => e.id)
+		})
+	}
 	let queues = Queue.get();
 	const length = queues.length + 1;
 	const appointments = [];
