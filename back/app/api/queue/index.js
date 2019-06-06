@@ -18,7 +18,7 @@ function createRealTimeAppointments(listOfAppointment, queueId) {
 	listOfAppointment.forEach((app) => {
 	  RealTimeAppointment.create({
 		id: i,
-		real_timestamp: app.starting_date,
+		real_timestamp: Math.floor(Date.now()/1000) + 15*(i+1)*60,
 		appointment_id: app.id,
 	  });
 	  i += 1;
@@ -56,7 +56,15 @@ function popNextAppointmentOfDay(queueNumber) {
   );
   if (realTimeAppointmentsOfDay.length > 0) {
 	const poppedid = realTimeAppointmentsOfDay[0]
-	Queue.update(queueNumber, {real_time_appointments: Queue.getById(queueNumber).real_time_appointments.filter(e => e != poppedid)});
+	const realTimeAppointments = Queue.getById(queueNumber).real_time_appointments.filter(e => e != poppedid);
+	let i = 0;
+	realTimeAppointments.forEach(id => {
+		const r = RealTimeAppointment.getById(id);
+		r.real_timestamp = Math.floor(Date.now()/1000) + 15*(i+1)*60,
+		RealTimeAppointment.update(r.id, r);
+		i++;
+	})
+	Queue.update(queueNumber, {real_time_appointments: realTimeAppointments});
 	const popped = RealTimeAppointment.getById(poppedid)
 	RealTimeAppointment.delete(poppedid);
 	return popped;
@@ -97,6 +105,8 @@ function split(length)
 	}
 	queues = Queue.getAddress();
 	appointments.forEach((e, i) => {
+		e.real_timestamp = Math.floor(Date.now()/1000) + (15*(i+1))*60;
+		RealTimeAppointment.update(e.id, e)
 		queues[i%length].real_time_appointments.push(e);
 	})
 	queues.forEach(q => {
@@ -152,9 +162,11 @@ router.get('/prev', (req, res) => {
 
 router.get('/pop', (req, res) => res.status(200).json(attachApplicant(popNextAppointmentOfDay(CURRENT_QUEUE))));
 
-router.get('/', (req, res) => res.status(200).json(Queue.get()));
+router.get('/', (req, res) => res.status(200).json(Queue.get().map(q => {
+	q.real_time_appointments.map(r => attachApplicant(RealTimeAppointment.getById(r)))
+})));
 
-router.get('/:id', (req, res) => res.status(200).json(Queue.getById(req.params.id)));
+router.get('/:id', (req, res) => res.status(200).json(Queue.getById(req.params.id).real_time_appointments.map(r => attachApplicant(RealTimeAppointment.getById(r)))));
 
 router.delete('/:id', (req, res) => res.status(200).json(RealTimeAppointment.delete(req.params.id)));
 
@@ -175,7 +187,7 @@ router.post('/', (req, res) => {
 		listOfAppointment.forEach((app) => {
 		RealTimeAppointment.create({
 			id: i,
-			real_timestamp: app.starting_date,
+			real_timestamp: Math.floor(Date.now()/1000) + 15*(i+1)*60,
 			appointment_id: app.id,
 		});
 		i += 1;
