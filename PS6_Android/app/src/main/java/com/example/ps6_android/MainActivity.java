@@ -23,6 +23,10 @@ import com.example.ps6_android.Models.Appointment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -35,9 +39,14 @@ public class MainActivity extends AppCompatActivity {
     String currentId;
     Button changeViewButton;
     Appointment currentAppointment;
+    public String data;
+    List<String> topics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        topics = new ArrayList<String>(
+                Arrays.asList("led", "simple_click", "long_click"));
 
 
         super.onCreate(savedInstanceState);
@@ -48,7 +57,29 @@ public class MainActivity extends AppCompatActivity {
         receiver = new MqttDataReceiver();
         this.registerReceiver(receiver, new IntentFilter("DATA_CHANGED"));
 
-        startService(new Intent(this, MqttService.class));
+        MqttHelper mqttHelper = new MqttHelper(getApplicationContext(), topics, new MqttHelper.recevice_callBack() {
+            @Override
+            public void callback(Context ctx, JSONObject json) {
+                System.out.println(">>>>>" + json);
+                try {
+
+                    data = json.getString("data");
+                    //sendDataToActivity();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+
+        mqttHelper.publishOnTopic("salut","coucou");
+
+
+
+
+
 
 
         WebHelper.getAppointments("40", new WebHelper.CallBack() {
@@ -81,11 +112,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateAppointment(String json){
 
-
-
         Log.d("updateApt",json+"");
 
     }
+
 
 
     public class MqttDataReceiver extends BroadcastReceiver {
@@ -102,8 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-
-
 
     }
 }
