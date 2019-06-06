@@ -565,9 +565,9 @@ console.log('Creating Appointments');
 for (i = 0; i < 1000; i++) {
   const after = getRandomNumber(0, 5) === 0;
   let date;
-  // do {
+  do {
     date = after ? getRandomDateAppointement() : getRandomTimestamp();
-  // } while (dateAlreadyUsed(date));
+  } while (dateAlreadyUsed(date));
   const num = getRandomNumber(0, types.length - 1);
   Appointment.create({
     id: i,

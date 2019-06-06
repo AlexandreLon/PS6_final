@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const {Router} = require('express');
 const {
   Appointment, RealTimeAppointment, Applicant, Queue,
 } = require('../../models');
@@ -9,19 +9,19 @@ let CURRENT_QUEUE = 0;
 function createRealTimeAppointments(listOfAppointment, queueId) {
   let i = 1;
   if (dayHasBegun == null || (dayHasBegun.getDate() !== new Date().getDate()
-	|| dayHasBegun.getMonth() !== new Date().getMonth()
-	|| dayHasBegun.getFullYear() !== new Date().getFullYear())) {
+    || dayHasBegun.getMonth() !== new Date().getMonth()
+    || dayHasBegun.getFullYear() !== new Date().getFullYear())) {
     dayHasBegun = new Date();
 
     RealTimeAppointment.get().forEach(e => RealTimeAppointment.delete(e.id));
 
     listOfAppointment.forEach((app) => {
-	  RealTimeAppointment.create({
+      RealTimeAppointment.create({
         id: i,
         real_timestamp: Math.floor(Date.now() / 1000) + 15 * (i + 1) * 60,
         appointment_id: app.id,
-	  });
-	  i += 1;
+      });
+      i += 1;
     });
     Queue.get().forEach(q => Queue.delete(q.id));
     Queue.create({
@@ -41,7 +41,7 @@ function getAppointmentsOfDay() {
   const END_OF_DAY = new Date(YEAR, MONTH, DAY, 23, 59, 59);
   const appointmentsOfDay = Appointment.get().filter(
     e => ((e.starting_date > CURRENT_TIME.getTime() / 1000 - CURRENT_TIME.getTimezoneOffset() * 60)
-	  && (e.starting_date < (END_OF_DAY.getTime() / 1000))),
+      && (e.starting_date < (END_OF_DAY.getTime() / 1000))),
   );
   return appointmentsOfDay;
 }
@@ -60,11 +60,11 @@ function popNextAppointmentOfDay(queueNumber) {
     let i = 0;
     realTimeAppointments.forEach((id) => {
       const r = RealTimeAppointment.getById(id);
-      r.real_timestamp = Math.floor((Date.now() / 1000) + 15 * (i + 1) * 60) - new Date().getTimezoneOffset() * 60;
+      r.real_timestamp = Math.floor(new Date().getTime() / 1000) + 15 * (i + 1) * 60;
       RealTimeAppointment.update(r.id, r);
       i++;
     });
-    Queue.update(queueNumber, { real_time_appointments: realTimeAppointments });
+    Queue.update(queueNumber, {real_time_appointments: realTimeAppointments});
     const popped = RealTimeAppointment.getById(poppedid);
     RealTimeAppointment.delete(poppedid);
     return popped;
@@ -74,14 +74,15 @@ function popNextAppointmentOfDay(queueNumber) {
 
 function attachApplicant(realTimeAppointment) {
   if (realTimeAppointment == null) return null;
+  console.log('--- Real time appointment:\n');
   console.log(realTimeAppointment);
   const appointment = Appointment.getById(realTimeAppointment.appointment_id);
   const applicant = Applicant.getById(appointment.applicant_id);
   realTimeAppointment.applicant = applicant;
+  console.log('--- Appointment:\n');
   console.log(appointment);
+  console.log('--- Applicant:\n');
   console.log(applicant);
-  console.log(applicant.id);
-  console.log(realTimeAppointment);
   return realTimeAppointment;
 }
 
@@ -133,7 +134,7 @@ function createNewQueue() {
   newQueue.sort((e1, e2) => e1.real_timestamp - e2.real_timestamp);
   for (let i = 0; i < QUEUES.length + 1; i += 1) {
     Queue.create({
-	  real_time_appointments: [],
+      real_time_appointments: [],
     });
     newQueues[i].real_time_appointments = [];
   }
@@ -159,7 +160,11 @@ router.get('/pop', (req, res) => res.status(200).json(attachApplicant(popNextApp
 
 router.get('/', (req, res) => res.status(200).json(Queue.get()));
 
-router.get('/:id', (req, res) => res.status(200).json(Queue.getById(req.params.id).real_time_appointments.map(r => attachAppointment(RealTimeAppointment.getById(r)))));
+router.get('/:id', (req, res) => {
+  //console.log(Queue.getById(req.params.id).real_time_appointments.map(r => attachAppointment(RealTimeAppointment.getById(r))[0]));
+  res.status(200).json(Queue.getById(req.params.id).real_time_appointments.map(r => attachAppointment(RealTimeAppointment.getById(r))));
+})
+;
 
 router.delete('/:id', (req, res) => {
   RealTimeAppointment.delete(req.params.id);
@@ -168,15 +173,15 @@ router.delete('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   if (dayHasBegun == null || (dayHasBegun.getDate() !== new Date().getDate()
-		|| dayHasBegun.getMonth() !== new Date().getMonth()
-		|| dayHasBegun.getFullYear() !== new Date().getFullYear())) {
+    || dayHasBegun.getMonth() !== new Date().getMonth()
+    || dayHasBegun.getFullYear() !== new Date().getFullYear())) {
     dayHasBegun = new Date();
 
     RealTimeAppointment.get().forEach(e => RealTimeAppointment.delete(e.id));
 
     const listOfAppointment = getAppointmentsOfDay().sort(
       (e1, e2) => e1.starting_date - e2.starting_date,
-		  );
+    );
     let i = 0;
     listOfAppointment.forEach((app) => {
       RealTimeAppointment.create({
