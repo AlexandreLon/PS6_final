@@ -4,104 +4,104 @@
     "year": "2016",
     "studies_level": "Bac",
     "establishment": "Lycée Jules-Ferry",
-    "grade": 15
+    "grade": 10
   },
   {
     "id": 1,
     "year": "2017",
     "studies_level": "Bac + 1",
     "establishment": "Peip",
-    "grade": 11
+    "grade": 17
   },
   {
     "id": 2,
     "year": "2018",
     "studies_level": "Bac + 2",
     "establishment": "Peip",
-    "grade": 14
+    "grade": 10
   },
   {
     "id": 3,
     "year": "2016",
     "studies_level": "Bac",
-    "establishment": "Lycée Régional Simone Veil",
-    "grade": 15
+    "establishment": "Lycée Jules-Ferry",
+    "grade": 16
   },
   {
     "id": 4,
     "year": "2017",
     "studies_level": "Bac + 1",
-    "establishment": "Lycée Bonaparte",
-    "grade": 19
+    "establishment": "Peip",
+    "grade": 12
   },
   {
     "id": 5,
     "year": "2018",
     "studies_level": "Bac + 2",
-    "establishment": "Lycée Bonaparte",
-    "grade": 16
+    "establishment": "Peip",
+    "grade": 18
   },
   {
     "id": 6,
     "year": "2016",
     "studies_level": "Bac",
     "establishment": "Lycée Jules-Ferry",
-    "grade": 19
+    "grade": 10
   },
   {
     "id": 7,
     "year": "2017",
     "studies_level": "Bac + 1",
     "establishment": "Peip",
-    "grade": 11
+    "grade": 15
   },
   {
     "id": 8,
     "year": "2018",
     "studies_level": "Bac + 2",
     "establishment": "Peip",
-    "grade": 18
+    "grade": 12
   },
   {
     "id": 9,
     "year": "2016",
     "studies_level": "Bac",
-    "establishment": "Lycée Thierry Maulnier",
-    "grade": 17
+    "establishment": "Lycée Jules-Ferry",
+    "grade": 16
   },
   {
     "id": 10,
     "year": "2017",
     "studies_level": "Bac + 1",
-    "establishment": "IUT de Nice",
+    "establishment": "Peip",
     "grade": 16
   },
   {
     "id": 11,
     "year": "2018",
     "studies_level": "Bac + 2",
-    "establishment": "IUT de Nice",
-    "grade": 15
+    "establishment": "Peip",
+    "grade": 19
   },
   {
     "id": 12,
     "year": "2016",
     "studies_level": "Bac",
-    "establishment": "Lycée Thierry Maulnier",
-    "grade": 19
+    "establishment": "Lycée Jules-Ferry",
+    "grade": 12
   },
   {
     "id": 13,
     "year": "2017",
     "studies_level": "Bac + 1",
-    "establishment": "IUT de Nice",
+    "establishment": "Peip",
     "grade": 16
   },
   {
     "id": 14,
     "year": "2018",
     "studies_level": "Bac + 2",
-    "establishment": "IUT de Nice",
-    "grade": 18
+    "establishment": "Peip",
+    "grade": 13
   }
 ]

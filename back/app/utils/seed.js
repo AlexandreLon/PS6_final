@@ -286,9 +286,9 @@ function getRandomDateAppointement() {
   const current = new Date();
   do {
     const plus = getRandomNumber(0, 3);
-    const min = plus == 0 ? current.getDate() + 1 : 1;
+    const min = plus === 0 ? current.getDate() : 1;
     date = new Date(current.getFullYear(), current.getMonth() + plus, getRandomNumber(min, current.getDate()));
-  } while (date.getDay() == 0 || date.getDay() == 6);
+  } while (date.getDay() === 0 || date.getDay() === 6);
   return date.getTime() / 1000 - date.getTimezoneOffset() * 60 + start_day + duration_hour * r_hour
   + r_minute * 15 * 60;
 }
@@ -563,11 +563,11 @@ console.log('Applications created with success');
 console.log('Creating Appointments');
 
 for (i = 0; i < 1000; i++) {
-  const after = getRandomNumber(0, 5) == 0;
+  const after = getRandomNumber(0, 5) === 0;
   let date;
-  do {
+  // do {
     date = after ? getRandomDateAppointement() : getRandomTimestamp();
-  } while (dateAlreadyUsed(date));
+  // } while (dateAlreadyUsed(date));
   const num = getRandomNumber(0, types.length - 1);
   Appointment.create({
     id: i,
