@@ -85,6 +85,15 @@ function attachApplicant(realTimeAppointment) {
   return realTimeAppointment;
 }
 
+function attachAppointment(realTimeAppointment) {
+	if (realTimeAppointment == null) return null;
+	const appointment = Appointment.getById(realTimeAppointment.appointment_id);
+	const applicant = Applicant.getById(appointment.applicant_id);
+	appointment.applicant = applicant
+	realTimeAppointment.appointment = appointment;
+	return realTimeAppointment;
+  }
+
 function split(length)
 {
 	console.log(length)
@@ -166,7 +175,7 @@ router.get('/pop', (req, res) => res.status(200).json(attachApplicant(popNextApp
 
 router.get('/', (req, res) => res.status(200).json(Queue.get()));
 
-router.get('/:id', (req, res) => res.status(200).json(Queue.getById(req.params.id).real_time_appointments.map(r => attachApplicant(RealTimeAppointment.getById(r)))));
+router.get('/:id', (req, res) => res.status(200).json(Queue.getById(req.params.id).real_time_appointments.map(r => attachAppointment(RealTimeAppointment.getById(r)))));
 
 router.delete('/:id', (req, res) => {
 	RealTimeAppointment.delete(req.params.id)
