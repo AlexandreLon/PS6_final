@@ -138,18 +138,19 @@ function createNewQueue() {
 
 const router = new Router();
 
-router.get('/', (req, res) => {
-  try {
-	const appointmentsOfDay = getAppointmentsOfDay();
-	res.status(200).json(createRealTimeAppointments(appointmentsOfDay));
-  } catch (err) {
-	if (err.name === 'ValidationError') {
-	  res.status(400).json(err.extra);
-	} else {
-	  res.status(500).json(err);
-	}
-  }
-});
+//What is that ?
+// router.get('/', (req, res) => {
+//   try {
+// 	const appointmentsOfDay = getAppointmentsOfDay();
+// 	res.status(200).json(createRealTimeAppointments(appointmentsOfDay));
+//   } catch (err) {
+// 	if (err.name === 'ValidationError') {
+// 	  res.status(400).json(err.extra);
+// 	} else {
+// 	  res.status(500).json(err);
+// 	}
+//   }
+// });
 
 router.get('/next', (req, res) => {
 	CURRENT_QUEUE = (CURRENT_QUEUE+1)%Queue.get().length;
@@ -163,13 +164,14 @@ router.get('/prev', (req, res) => {
 
 router.get('/pop', (req, res) => res.status(200).json(attachApplicant(popNextAppointmentOfDay(CURRENT_QUEUE))));
 
-router.get('/', (req, res) => res.status(200).json(Queue.get().map(q => {
-	q.real_time_appointments.map(r => attachApplicant(RealTimeAppointment.getById(r)))
-})));
+router.get('/', (req, res) => res.status(200).json(Queue.get()));
 
 router.get('/:id', (req, res) => res.status(200).json(Queue.getById(req.params.id).real_time_appointments.map(r => attachApplicant(RealTimeAppointment.getById(r)))));
 
-router.delete('/:id', (req, res) => res.status(200).json(RealTimeAppointment.delete(req.params.id)));
+router.delete('/:id', (req, res) => {
+	RealTimeAppointment.delete(req.params.id)
+	res.status(200).json(Queue.get())
+});
 
 // router.put('/:id', (req, res) => res.status(200).json(RealTimeAppointment.update(req.params.id, req.body)));
 
@@ -201,7 +203,7 @@ router.post('/', (req, res) => {
 	}
 	const length = Queue.get().length + 1;
 	let queues = split(length);
-	res.status(200).json(queues[length-1]);
+	res.status(200).json(Queue.get())
 })
 
 router.delete('/', (req, res) => {
