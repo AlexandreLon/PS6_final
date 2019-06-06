@@ -46,4 +46,14 @@ public class Applicant
     public boolean isTurn() {
         return isTurn;
     }
+
+    @Override
+    public String toString() {
+        return "Applicant{" +
+                "applicant_id=" + applicant_id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", isTurn=" + isTurn +
+                '}';
+    }
 }
