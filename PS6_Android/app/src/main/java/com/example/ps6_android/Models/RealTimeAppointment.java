@@ -33,4 +33,12 @@ public class RealTimeAppointment
     public Appointment getAppointment() {
         return appointment;
     }
+
+    @Override
+    public String toString() {
+        return "RealTimeAppointment{" +
+                "appointment=" + appointment +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }
