@@ -105,9 +105,10 @@ function split(length)
 	}
 	queues = Queue.getAddress();
 	appointments.forEach((e, i) => {
-		e.real_timestamp = Math.floor(Date.now()/1000) + (15*(i+1))*60;
-		RealTimeAppointment.update(e.id, e)
-		queues[i%length].real_time_appointments.push(e);
+		const r = RealTimeAppointment.getById(e);
+		r.real_timestamp = Math.floor(Date.now()/1000) + (15*(i+1))*60;
+		RealTimeAppointment.update(r.id, r)
+		queues[i%length].real_time_appointments.push(r.id);
 	})
 	queues.forEach(q => {
 		Queue.update(q.id, q);
