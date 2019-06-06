@@ -77,6 +77,34 @@ function attachApplicant(realTimeAppointment) {
   return realTimeAppointment;
 }
 
+function split(length)
+{
+	console.log(length)
+	var queues = Queue.get();
+	const appointments = [];
+	queues.forEach(q => {
+		q.real_time_appointments.forEach(app => {
+			appointments.push(app)
+		})
+	})
+	queues.forEach(q => Queue.delete(q.id));
+	for(let i=0; i<length; i++)
+	{
+		Queue.create({
+			id: i,
+			real_time_appointments: []
+		})
+	}
+	queues = Queue.getAddress();
+	appointments.forEach((e, i) => {
+		queues[i%length].real_time_appointments.push(e);
+	})
+	queues.forEach(q => {
+		Queue.update(q.id, q);
+	})
+	return queues;
+}
+
 function createNewQueue() {
   const QUEUES = Queue.get();
   let newQueue = [];
@@ -140,6 +168,10 @@ router.post('/', (req, res) => {
 
 		RealTimeAppointment.get().forEach(e => RealTimeAppointment.delete(e.id));
 
+		const listOfAppointment = getAppointmentsOfDay().sort(
+			(e1, e2) => e1.starting_date - e2.starting_date,
+		  );
+			let i =0;
 		listOfAppointment.forEach((app) => {
 		RealTimeAppointment.create({
 			id: i,
@@ -154,30 +186,22 @@ router.post('/', (req, res) => {
 			real_time_appointments: RealTimeAppointment.get().map(e => e.id)
 		})
 	}
-	let queues = Queue.get();
-	const length = queues.length + 1;
-	const appointments = [];
-	queues.forEach(q => {
-		q.real_time_appointments.forEach(app => {
-			appointments.push(app)
-		})
-	})
-	queues.forEach(q => Queue.delete(q.id));
-	for(let i=0; i<length; i++)
-	{
-		Queue.create({
-			id: i,
-			real_time_appointments: []
-		})
-	}
-	queues = Queue.getAddress();
-	appointments.forEach((e, i) => {
-		queues[i%length].real_time_appointments.push(e);
-	})
-	queues.forEach(q => {
-		Queue.update(q.id, q);
-	})
+	const length = Queue.get().length + 1;
+	let queues = split(length);
 	res.status(200).json(queues[length-1]);
+})
+
+router.delete('/', (req, res) => {
+	if(Queue.get().length - 1 > 0)
+	{
+		const length = Queue.get().length - 1;
+		let queues = split(length);
+		res.status(200).json(queues[length-1]);
+	}
+	else
+	{
+		res.status(400).json("No queues");
+	}
 })
 
 module.exports = router;
