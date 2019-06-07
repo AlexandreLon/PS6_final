@@ -1,5 +1,7 @@
 package com.example.ps6_android.Models;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,10 +23,11 @@ public class RealTimeAppointment
         this(null, new Date());
     }
 
+
     public RealTimeAppointment(JSONObject object) throws JSONException
     {
-        this(new Appointment(object.getJSONObject("appointment")), new Date(object.getInt("real_timestamp")));
-    }
+        this(new Appointment(object.getJSONObject("appointment")), new Date(1000l * object.getInt("real_timestamp")));
+        }
 
     public Date getTimestamp() {
         return timestamp;
@@ -32,5 +35,13 @@ public class RealTimeAppointment
 
     public Appointment getAppointment() {
         return appointment;
+    }
+
+    @Override
+    public String toString() {
+        return "RealTimeAppointment{" +
+                "appointment=" + appointment +
+                ", timestamp=" + timestamp +
+                '}';
     }
 }

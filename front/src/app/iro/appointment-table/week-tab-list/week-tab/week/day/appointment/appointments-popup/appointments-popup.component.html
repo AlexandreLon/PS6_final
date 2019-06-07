@@ -13,7 +13,7 @@
             </div>
         </ng-template>
         
-        <h1 mat-dialog-title>Rendez-vous avec {{appointment.applicant.firstname}} {{appointment.applicant.lastname}}</h1>
+        <h1 mat-dialog-title>Rendez-vous avec {{appointment.applicant.firstname}} {{appointment.applicant.lastname}} <span style="font-size: 20px">(ID {{appointment.applicant.id}} ; RDV {{appointment.id}})</span></h1>
         <div mat-dialog-content style="margin: 0;padding: 0;">
             <p>Type : {{appointment.type}}</p>
             <p>Objet : {{appointment.object}}</p>

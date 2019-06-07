@@ -135,6 +135,7 @@ public class MqttHelper {
         MqttMessage message = new MqttMessage(messageToPublish.getBytes());
         try {
             mqttAndroidClient.publish(topic, message);
+            Log.d("tag","passe");
         } catch (MqttException e) {
             e.printStackTrace();
         }
