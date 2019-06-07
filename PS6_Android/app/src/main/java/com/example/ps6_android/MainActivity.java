@@ -1,30 +1,19 @@
 package com.example.ps6_android;
 
-import android.app.Application;
+
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
-import android.graphics.drawable.Drawable;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.example.ps6_android.Models.Applicant;
 import com.example.ps6_android.Models.Appointment;
 import com.example.ps6_android.Models.RealTimeAppointment;
 
@@ -48,12 +37,9 @@ public class MainActivity extends AppCompatActivity {
     TextView idnext;
     TextView idprev;
 
-    RelativeLayout linearLayout;
 
     MqttDataReceiver receiver;
     String currentId;
-    Button changeViewButton;
-    Appointment currentAppointment;
     public String data;
     List<String> topics;
     RecyclerView listView;
@@ -67,17 +53,20 @@ public class MainActivity extends AppCompatActivity {
     Button nextStudent;
     String currentQueue;
     int[] queues;
+    TextView idCurrentStu;
+    TextView idStu;
 
     MqttHelper mqttHelper;
 
     List<RealTimeAppointment> realApp = new ArrayList<>();
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         topics = new ArrayList<String>(
-                Arrays.asList("printer_queue","printer_list", "simple_click", "long_click","printer_big"));
+                Arrays.asList("printer_queue","printer_list", "simple_click", "long_click","printer_big","printer_current"));
 
 
         super.onCreate(savedInstanceState);
@@ -92,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         previousButton = findViewById(R.id.heap_before_button);
         nextButton = findViewById(R.id.heap_next_button);
         nextStudent = findViewById(R.id.nextstudent);
+        idCurrentStu = findViewById(R.id.idCurrentStu);
+        idStu = findViewById(R.id.textView6);
 
 
         receiver = new MqttDataReceiver();
@@ -104,8 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 try {
 
                     data = json.getString("data");
-                    Log.d("tag2",json.toString());
-                    //sendDataToActivity();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -135,10 +124,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
 
-                Log.d("message", mqttMessage.toString());
+
                 if (s.equals("printer_list")) {
-                    Log.d("message","passe");
                     if (mqttMessage.toString().equals("[]")){
+                        realApp.clear();
+                        mAdapter.notifyDataSetChanged();
                         return;
                     }
                     realApp.clear();
@@ -154,16 +144,14 @@ public class MainActivity extends AppCompatActivity {
                     realApp.forEach(new Consumer<RealTimeAppointment>() {
                         @Override
                         public void accept(RealTimeAppointment realTimeAppointment) {
-                            Log.d("appoitnment",realTimeAppointment.toString());
                         }
                     });
-                    //Log.d("message2",);
 
 
                 }else if(s.equals("printer_queue")){
 
                     JSONObject json = new JSONObject(mqttMessage.toString());
-                    Log.d("message3",currentQueue);
+
 
                     String tmp = json.getString("data");
 
@@ -177,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
                         } catch (NumberFormatException nfe) {
                             //
                         }
-                        Log.d("message5",queues[i]+"");
                     }
                     updatePaginator();
 
@@ -186,8 +173,11 @@ public class MainActivity extends AppCompatActivity {
 
                     JSONObject json = new JSONObject(mqttMessage.toString());
                     currentQueue = json.getString("data");
-                    Log.d("message4",currentQueue);
                     updatePaginator();
+                }else if(s.equals("printer_current")){
+                    JSONObject json = new JSONObject(mqttMessage.toString());
+                    currentId = json.getString("data");
+                    idCurrentStu.setText(currentId);
                 }
 
             }
@@ -196,20 +186,6 @@ public class MainActivity extends AppCompatActivity {
             public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {            }
 
         });
-
-
-
-
-
-        //
-
-
-
-
-
-
-
-
 
         plusButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -238,30 +214,6 @@ public class MainActivity extends AppCompatActivity {
                 nextStu();
             }
         });
-
-
-
-
-        /*WebHelper.getAppointments("40", new WebHelper.CallBack() {
-            @Override
-            public void Callback(WebHelper.Result result) {
-                updateAppointment("coucou");
-                if(result.statusCode == 200){
-                    try {
-                        currentAppointment = new Appointment(result.body);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                else{
-                    Log.d("error",result.error);
-                }
-
-            }
-        });*/
-
-
-        //idStudent.setText();
     }
 
     private void nextStu() {
@@ -270,22 +222,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void minus() {
-        Log.d("tag","minus");
         mqttHelper.publishOnTopic("btn-minus","minus");
     }
 
     private void plus() {
-        Log.d("tag","plus");
         mqttHelper.publishOnTopic("btn-plus","plus");
+        mAdapter.notifyDataSetChanged();
     }
 
     private void previousHeap() {
-        Log.d("tag","previous");
         mqttHelper.publishOnTopic("btn-left","left");
     }
 
     private void nextHeap() {
-        Log.d("tag","next");
         mqttHelper.publishOnTopic("btn-right","right");
     }
 
@@ -293,16 +242,8 @@ public class MainActivity extends AppCompatActivity {
      * Update the view with the json arguments
      */
     public void updateView(String id){
-        Log.d("update",id+"");
         currentId = id;
     }
-
-    public void updateAppointment(String json){
-
-        Log.d("updateApt",json+"");
-
-    }
-
 
 
     public class MqttDataReceiver extends BroadcastReceiver {
@@ -310,13 +251,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            Log.d("received","ok");
             if(intent.getAction().equals("DATA_CHANGED"))
             {
-
-
                 updateView(intent.getStringExtra("DATA"));
-
             }
         }
 
@@ -349,10 +286,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         idprev.setText(strl);
-        Log.d("test","tabLeft "+tabl.toString());
-        Log.d("test","tabLeft "+strl);
         idnext.setText(strr);
-        Log.d("test","tabRight "+tabr.toString());
-        Log.d("test","tabRight "+strr);
     }
 }
