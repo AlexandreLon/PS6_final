@@ -1,4 +1,4 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const {
   Appointment, RealTimeAppointment, Applicant, Queue,
 } = require('../../models');
@@ -18,7 +18,7 @@ function createRealTimeAppointments(listOfAppointment, queueId) {
     listOfAppointment.forEach((app) => {
       RealTimeAppointment.create({
         id: i,
-        real_timestamp: Math.floor(Date.now() / 1000) + 15 * (i + 1) * 60,
+        real_timestamp: Math.floor(Date.now() / 1000) + 15 * (i - 1) * 60,
         appointment_id: app.id,
       });
       i += 1;
@@ -64,7 +64,7 @@ function popNextAppointmentOfDay(queueNumber) {
       RealTimeAppointment.update(r.id, r);
       i++;
     });
-    Queue.update(queueNumber, {real_time_appointments: realTimeAppointments});
+    Queue.update(queueNumber, { real_time_appointments: realTimeAppointments });
     const popped = RealTimeAppointment.getById(poppedid);
     RealTimeAppointment.delete(poppedid);
     return popped;
@@ -74,15 +74,27 @@ function popNextAppointmentOfDay(queueNumber) {
 
 function attachApplicant(realTimeAppointment) {
   if (realTimeAppointment == null) return null;
-  console.log('--- Real time appointment:\n');
-  console.log(realTimeAppointment);
+
   const appointment = Appointment.getById(realTimeAppointment.appointment_id);
   const applicant = Applicant.getById(appointment.applicant_id);
+
   realTimeAppointment.applicant = applicant;
-  console.log('--- Appointment:\n');
-  console.log(appointment);
-  console.log('--- Applicant:\n');
-  console.log(applicant);
+  // console.log('--- Appointment:\n');
+  // console.log(appointment);
+  console.log('Etudiant actuel:');
+  console.log(`ID: ${applicant.id}`);
+  console.log(applicant.lastname.toUpperCase());
+  console.log(applicant.firstname);
+  console.log(RealTimeAppointment.get());
+
+  console.log('\n--- Liste des rendez-vous suivants ---');
+  for (let i = 0; i < RealTimeAppointment.get().length; i += 1) {
+    const appHour = new Date(RealTimeAppointment.get()[i].real_timestamp * 1000).getHours();
+    const appMinute = new Date(RealTimeAppointment.get()[i].real_timestamp * 1000).getMinutes();
+    console.log(`\nHEURE ESTIMEE DU RENDEZ-VOUS ${RealTimeAppointment.get()[i].appointment_id}`);
+    console.log(`${appHour}h ${appMinute}\n`);
+  }
+
   return realTimeAppointment;
 }
 
@@ -161,11 +173,9 @@ router.get('/pop', (req, res) => res.status(200).json(attachApplicant(popNextApp
 router.get('/', (req, res) => res.status(200).json(Queue.get()));
 
 router.get('/:id', (req, res) => {
-  //console.log(Queue.getById(req.params.id).real_time_appointments.map(r => attachAppointment(RealTimeAppointment.getById(r))[0]));
+  // console.log(Queue.getById(req.params.id).real_time_appointments.map(r => attachAppointment(RealTimeAppointment.getById(r))[0]));
   res.status(200).json(Queue.getById(req.params.id).real_time_appointments.map(r => attachAppointment(RealTimeAppointment.getById(r))));
-})
-;
-
+});
 router.delete('/:id', (req, res) => {
   RealTimeAppointment.delete(req.params.id);
   res.status(200).json(Queue.get());
@@ -207,7 +217,7 @@ router.delete('/', (req, res) => {
     const length = Queue.get().length - 1;
     const queues = split(length);
     res.status(200).json(Queue.get());
-    //res.status(200).json(queues[length - 1]);
+    // res.status(200).json(queues[length - 1]);
   } else {
     res.status(400).json('No queues');
   }
